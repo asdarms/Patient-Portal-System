@@ -2,10 +2,11 @@
 
 <head>
     <title>Patients</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="css/styles.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
+    <?php require_once 'functions.php'?>
     <table class="table">
         <thead class="thead-light">
             <tr>
@@ -17,20 +18,7 @@
         </thead>
         <tbody>
             <?php
-            function OpenCon()
-            {
-                $dbhost = "localhost";
-                $dbuser = "root";
-                $dbpass = "";
-                $db = "hospital";
-                $conn = new mysqli($dbhost, $dbuser, $dbpass, $db) or die("Connect failed: %s\n" . $conn->error);
-
-                return $conn;
-            }
-            function CloseCon($conn)
-            {
-                $conn->close();
-            }
+            
             $conn = OpenCon();
             if ($result = $conn->query("SELECT * FROM patient")) {
             }
