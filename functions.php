@@ -31,7 +31,7 @@ function registerUser($conn): int{
 
     //convert password to int then string, if converted successfully then if the first char contains a digit they will be equal and thus not be allowed 
     if(!(((string) (int) $password) === $password) && strlen($password) > 7){
-        if(mysqli_num_rows(mysqli_query($conn, "select * from User WHERE email='$email'")) == 0){
+        if(mysqli_num_rows(mysqli_query($conn, "select * from User WHERE phoneNumber='$phoneNumber'")) == 0){
         $hash = password_hash($password, `PASSWORD_BCRYPT`);
         $query = "insert into User (firstname, lastName, userName, email, phoneNumber, passwordHash) values ('$firstName', '$lastName', '$userName', '$email', '$phoneNumber', '$hash')";
             if (mysqli_query($conn, $query)){
