@@ -4,10 +4,11 @@
     if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['userName']) && isset($_POST['email']) && isset($_POST['phoneNumber']) && isset($_POST['password']) && isset($_POST['passwordConfirm'])){
         $result = registerUser($conn);
         if ($result == 0){
-            header("Location: login.php?success=0");
+            header("Location: login.php");
             die();
         } else {
-            header("Location: register.php?success='$result'");
+            $_SESSION['success'] = $result;
+            header("Location: register.php");
             die();
         }
     }
@@ -26,6 +27,7 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
+        <?php require 'header.php';?>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -84,6 +86,13 @@
                                     <div class="card-footer text-center py-3">
                                         <div class="small"><a href="login.php">Have an account? Go to login</a></div>
                                     </div>
+                                    <?php 
+                                    if(isset($_SESSION['success']) && $_SESSION['success'] == 3){
+                                        echo '<div class="card-body">
+                                                    Password must contain at least 7 digits
+                                                </div>';
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
