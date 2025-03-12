@@ -1,4 +1,5 @@
 <?php 
+    require 'header.php';
     require 'functions.php';
     $conn = OpenCon();
     if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['userName']) && isset($_POST['email']) && isset($_POST['phoneNumber']) && isset($_POST['password']) && isset($_POST['passwordConfirm'])){
@@ -27,7 +28,7 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
-        <?php require 'header.php';?>
+        
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
