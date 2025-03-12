@@ -1,4 +1,5 @@
 <?php 
+    require 'header.php';
     require 'functions.php';
     $conn = OpenCon();
     if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['email']) && isset($_POST['password'])){

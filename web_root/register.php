@@ -4,13 +4,14 @@
     $conn = OpenCon();
     if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['userName']) && isset($_POST['email']) && isset($_POST['phoneNumber']) && isset($_POST['password']) && isset($_POST['passwordConfirm'])){
         $result = registerUser($conn);
-        if ($result == 0){
-            header("Location: login.php");
-            die();
-        } else {
-            $_SESSION['success'] = $result;
-            header("Location: register.php");
-            die();
+        switch ($result) {
+            case 0:
+                header("Location: login.php");
+                die();
+            default:
+                $_SESSION['success'] = $result;
+                header("Location: register.php");
+                die();
         }
     }
         ?>
@@ -92,7 +93,7 @@
                                         echo '<div class="card-body">
                                                     Password must contain at least 7 digits
                                                 </div>';
-                                    }
+                                    } 
                                     ?>
                                 </div>
                             </div>
