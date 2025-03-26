@@ -28,9 +28,8 @@ function registerUser($conn): int{
     $access_level = 0;
     $rand_level = rand(1,10);
     $rand_level = $rand_level/100;
-
-    //convert password to int then string, if converted successfully then if the first char contains a digit they will be equal and thus not be allowed 
-    if(!(((string) (int) $password) === $password) && strlen($password) > 7){
+ 
+    if(strlen($password) > 7){
         if(validatePhoneNumber($phoneNumber) !== false){
             $phoneNumber = validatePhoneNumber($phoneNumber);
             if(mysqli_num_rows(mysqli_query($conn, "select * from User WHERE phoneNumber='$phoneNumber'")) == 0){
@@ -93,6 +92,7 @@ function loginUser($conn): int{
     if(mysqli_num_rows($userData = mysqli_query($conn, "select * from user WHERE email='$email'"))>0){
         //if it does exist
         //check if password for it is correct
+        
         $userData = mysqli_fetch_array($userData);
         if(password_verify($password, $userData['passwordHash'])){
             //if it is correct
@@ -101,9 +101,10 @@ function loginUser($conn): int{
             }
             
             // Set user data in session
-            $_SESSION['userID'] = $userData['userID'];
-            $_SESSION['userName'] = $userData['userName'];
-            $_SESSION['loggedIn'] = true;
+            if($_POST['rememberMe'] == 'checked'){
+                rememberMe($conn, $userData['userID'], 60);
+            }
+            setUser($userData);
             sleep($rand_level);
             return 0;
         }
@@ -112,5 +113,194 @@ function loginUser($conn): int{
     }
     sleep($rand_level);
     return 2;
+}
+
+function isUserLoggedIn($conn): bool
+{
+    if(isset($_SESSION['userName'])){
+        return true;
+    }
+    // check the remember_me in cookie
+    $token = filter_input(INPUT_COOKIE, 'rememberMe', FILTER_SANITIZE_STRING);
+
+    if ($token && tokenIsValid($conn, $token)) {
+
+        $user = findUserByToken($conn, $token);
+
+        if ($user) {
+            return setUser( $user);
+        }
+    }
+    return false;
+}
+
+/**
+ * Removes session data to log a user out. 
+ * 
+ * @param mixed $conn
+ * @return int 0 if successful,
+ * 1 if the session_unset() or session_regenerate_id() are false,
+ * and 2 if the user isnt logged in
+ */
+function logoutUser($conn): int{
+    
+    if(isUserLoggedIn($conn)){
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        if(session_unset() && session_regenerate_id(true)){
+            return 0;
+        }
+        return 1;
+    }
+    return 2;
+    
+}
+
+function generateTokens(): array{
+    $selector = bin2hex(random_bytes(16));
+    $validator = bin2hex(random_bytes(32));
+
+    return [$selector, $validator, $selector . ':' . $validator];
+}
+
+function parseToken(string $token): ?array
+{
+    $parts = explode(':', $token);
+
+    if ($parts && count($parts) == 2) {
+        return [$parts[0], $parts[1]];
+    }
+    return null;
+}
+
+function insertUserToken($conn, int $userID, string $selector, string $hashed_validator, string $expiry): bool
+{
+    $sql = "INSERT INTO user_tokens(userID, selector, hashed_validator, expiry)
+            VALUES('$userID', '$selector', '$hashed_validator', '$expiry')";
+    
+    if(mysqli_query($conn, $sql)){
+        return true;
+    }
+    return false;
+}
+
+function findUserTokenBySelector($conn, string $selector)
+{
+
+    $sql = "SELECT id, selector, hashed_validator, userID, expiry
+                FROM user_tokens
+                WHERE selector = '$selector' AND
+                    expiry >= now()
+                LIMIT 1";
+
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) > 0){
+        return mysqli_fetch_assoc($result);
+    }
+
+    return false;
+}
+
+function deleteUserToken($conn, int $user_id): bool
+{
+    $sql = "DELETE FROM user_tokens WHERE userID = '$user_id'";
+
+    if(mysqli_query($conn, $sql)){
+        return true;
+    }
+    return false;
+
+}
+
+function findUserByToken($conn, string $token)
+{
+    $tokens = parseToken($token);
+
+    if (!$tokens) {
+        return null;
+    }
+
+    $sql = "SELECT user.userID, userName
+            FROM user
+            INNER JOIN user_tokens ON user_tokens.userID = user.userID
+            WHERE selector = '$tokens[0]' AND
+                expiry > now()
+            LIMIT 1";
+
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) > 0){
+        return mysqli_fetch_assoc($result);
+    }
+
+    return false;
+}
+
+function tokenIsValid($conn, string $token): bool { 
+    // parse the token to get the selector and validator 
+    
+    [$selector, $validator] = parseToken($token);
+    $tokens = findUserTokenBySelector($conn, $selector);
+    if (!$tokens) {
+        return false;
+    }
+    
+    return password_verify($validator, $tokens['hashed_validator']);
+}
+
+function setUser(array $user): bool
+{
+    // prevent session fixation attack
+    if (session_regenerate_id()) {
+        // set username & id in the session
+        $_SESSION['userName'] = $user['userName'];
+        $_SESSION['userID'] = $user['userID'];
+        return true;
+    }
+
+    return false;
+}
+
+function rememberMe($conn, int $user_id, int $day = 30)
+{
+    [$selector, $validator, $token] = generateTokens();
+
+    // remove all existing token associated with the user id
+    deleteUserToken($conn, $user_id);
+
+    // set expiration date
+    $expired_seconds = time() + 60 * 60 * 24 * $day;
+
+    // insert a token to the database
+    $hash_validator = password_hash($validator, PASSWORD_DEFAULT);
+    $expiry = date('Y-m-d H:i:s', $expired_seconds);
+
+    if (insertUserToken($conn, $user_id, $selector, $hash_validator, $expiry)) {
+        setcookie('rememberMe', $token, $expired_seconds);
+    }
+}
+
+function logout($conn): void
+{
+    if (isUserLoggedIn($conn)) {
+
+        // delete the user token
+        deleteUserToken($conn, $_SESSION['userID']);
+
+        // delete session
+        unset($_SESSION['userName'], $_SESSION['userID`']);
+
+        // remove the remember_me cookie
+        if (isset($_COOKIE['rememberMe'])) {
+            unset($_COOKIE['rememberMe']);
+            setcookie('rememberMe', null, -1);
+        }
+
+        // remove all session data
+        session_destroy();
+
+        // redirect to the login page
+        Header('Location: login.php');
+    }
 }
 

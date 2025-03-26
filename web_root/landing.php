@@ -1,4 +1,11 @@
-<?php require 'header.php';?>
+<?php require 'header.php';
+require 'functions.php';
+$conn = OpenCon();
+
+if(!isUserLoggedIn($conn)){
+    Header("Location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -34,7 +41,7 @@
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>
                 </li>
             </ul>
