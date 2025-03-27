@@ -15,6 +15,7 @@ How to setup:
 7. Hit Ctrl+Enter to run the commands, this should create the database with all appropriate tables
 8. Navigate to localhost/hospital/web_root/login.php to access site
 
+## GitHub Support
 If you want the project to integrate with GitHub, follow these steps:
 1. Download GitHub Desktop
 2. From GitHub Dekstop, clone this repository to any folder
@@ -24,3 +25,7 @@ If you want the project to integrate with GitHub, follow these steps:
 5. Go back to GitHub Desktop, it will now say the project has moved and cannot be found
 6. Click the "Locate Project" option and navigate to xampp/htdocs/hospital
 7. GitHub Desktop will now see this directory as the location of the project, so it can be updated live with GitHub commits
+
+### Entity Relationship Diagram
+Here is the ERD for the Hospital database, for reference:
+![Hospital ERD](ERD.png)
