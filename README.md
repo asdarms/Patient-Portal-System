@@ -13,7 +13,7 @@ How to setup:
 5. On main page, go to SQL tab and copy the code from DatabaseGenerationScript.sql into the console, like so:
 ![Command to create database](sql.png)
 7. Hit Ctrl+Enter to run the commands, this should create the database with all appropriate tables
-8. Navigate to localhost/hospital/web_root/login.php to access site
+8. Go to localhost/hospital/web_root/login.php in your browser to access site
 
 ## GitHub Support
 If you want the project to integrate with GitHub, follow these steps:
