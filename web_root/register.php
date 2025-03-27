@@ -93,6 +93,10 @@
                                         echo '<div class="card-body">
                                                     Password must contain at least 7 digits
                                                 </div>';
+                                    } else if(isset($_SESSION['success']) && $_SESSION['success'] == 4){
+                                        echo '<div class="card-body">
+                                                    Must have a proper phone number
+                                                </div>';
                                     } 
                                     ?>
                                 </div>

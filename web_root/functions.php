@@ -53,6 +53,7 @@ function registerUser($conn): int{
             sleep($rand_level);
             return 2;
         }
+        return 4;
     }
     sleep(seconds: $rand_level);
     return 3;
