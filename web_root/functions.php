@@ -6,6 +6,7 @@ function OpenCon()
         $dbpass = file_get_contents('dbpass.pass');
         if ($dbpass === false){
             echo "Error getting the contents of your dbpass.pass file, did you create one? Git will not pull it automatically";
+            $dbpass = '';
         }
         
         $db = "hospital";
