@@ -18,12 +18,23 @@ USE `hospital` ;
 -- Table `hospital`.`user`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hospital`.`user` ;
+DROP TABLE IF EXISTS `hospital`.`visitor` ;
+DROP TABLE IF EXISTS `hospital`.`staff` ;
+DROP TABLE IF EXISTS `hospital`.`shift` ;
+DROP TABLE IF EXISTS `hospital`.`patient` ;
+DROP TABLE IF EXISTS `hospital`.`appointment` ;
+DROP TABLE IF EXISTS `hospital`.`reminder` ;
+DROP TABLE IF EXISTS `hospital`.`lab_order` ;
+DROP TABLE IF EXISTS `hospital`.`lab_result` ;
+DROP TABLE IF EXISTS `hospital`.`user_token` ;
+DROP TABLE IF EXISTS `hospital`.`bill` ;
+DROP TABLE IF EXISTS `hospital`.`prescription` ;
 
 CREATE TABLE IF NOT EXISTS `hospital`.`user` (
   `user_id` BIGINT NOT NULL,
   `first_name` VARCHAR(25) NOT NULL,
   `last_name` VARCHAR(50) NOT NULL,
-  `phone_number` INT NOT NULL,
+  `phone_number` BIGINT NOT NULL,
   `email` VARCHAR(50) NOT NULL,
   `username` VARCHAR(25) NOT NULL,
   `password_hash` VARCHAR(60) NOT NULL,
@@ -36,7 +47,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `hospital`.`visitor`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `hospital`.`visitor` ;
 
 CREATE TABLE IF NOT EXISTS `hospital`.`visitor` (
   `visitor_id` INT NOT NULL,
@@ -55,7 +65,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `hospital`.`staff`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `hospital`.`staff` ;
 
 CREATE TABLE IF NOT EXISTS `hospital`.`staff` (
   `staff_id` INT NOT NULL,
@@ -75,7 +84,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `hospital`.`shift`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `hospital`.`shift` ;
 
 CREATE TABLE IF NOT EXISTS `hospital`.`shift` (
   `shift_id` INT NOT NULL,
@@ -83,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `hospital`.`shift` (
   `end_time` DATETIME NULL,
   `working` BINARY(1) NULL,
   `staff_id` INT NOT NULL,
-  `staff_user_id` INT NOT NULL,
+  `staff_user_id` BIGINT NOT NULL,
   PRIMARY KEY (`shift_id`, `staff_id`, `staff_user_id`),
   INDEX `fk_shift_staff1_idx` (`staff_id` ASC, `staff_user_id` ASC) ,
   CONSTRAINT `fk_shift_staff1`
@@ -97,7 +105,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `hospital`.`patient`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `hospital`.`patient` ;
 
 CREATE TABLE IF NOT EXISTS `hospital`.`patient` (
   `patient_id` INT NOT NULL,
@@ -123,7 +130,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `hospital`.`bill`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `hospital`.`bill` ;
 
 CREATE TABLE IF NOT EXISTS `hospital`.`bill` (
   `bill_id` INT NOT NULL,
@@ -132,9 +138,9 @@ CREATE TABLE IF NOT EXISTS `hospital`.`bill` (
   `description` VARCHAR(45) NULL,
   `notes` TINYTEXT NULL,
   `patient_id` INT NOT NULL,
-  `patient_user_id` INT NOT NULL,
+  `patient_user_id` BIGINT NOT NULL,
   `staff_id` INT NOT NULL,
-  `staff_user_id` INT NOT NULL,
+  `staff_user_id` BIGINT NOT NULL,
   PRIMARY KEY (`bill_id`, `patient_id`, `patient_user_id`),
   INDEX `fk_bill_patient1_idx` (`patient_id` ASC, `patient_user_id` ASC) ,
   INDEX `fk_bill_staff1_idx` (`staff_id` ASC, `staff_user_id` ASC) ,
@@ -154,7 +160,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `hospital`.`prescription`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `hospital`.`prescription` ;
+
 
 CREATE TABLE IF NOT EXISTS `hospital`.`prescription` (
   `prescription_id` INT NOT NULL,
@@ -191,7 +197,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `hospital`.`appointment`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `hospital`.`appointment` ;
 
 CREATE TABLE IF NOT EXISTS `hospital`.`appointment` (
   `appointment_id` INT NOT NULL,
@@ -227,7 +232,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `hospital`.`reminder`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `hospital`.`reminder` ;
+
 
 CREATE TABLE IF NOT EXISTS `hospital`.`reminder` (
   `reminder_id` INT NOT NULL,
@@ -248,7 +253,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `hospital`.`lab_order`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `hospital`.`lab_order` ;
+
 
 CREATE TABLE IF NOT EXISTS `hospital`.`lab_order` (
   `order_id` INT NOT NULL,
@@ -259,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `hospital`.`lab_order` (
   `appointment_id` INT NOT NULL,
   `patient_id` INT NOT NULL,
   `staff_id` INT NOT NULL,
-  `staff_user_id` INT NOT NULL,
+  `staff_user_id` BIGINT NOT NULL,
   PRIMARY KEY (`order_id`),
   INDEX `fk_lab_order_appointment1_idx` (`appointment_id` ASC, `patient_id` ASC) ,
   INDEX `fk_lab_order_staff1_idx` (`staff_id` ASC, `staff_user_id` ASC) ,
@@ -275,11 +280,9 @@ CREATE TABLE IF NOT EXISTS `hospital`.`lab_order` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `hospital`.`lab_result`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `hospital`.`lab_result` ;
 
 CREATE TABLE IF NOT EXISTS `hospital`.`lab_result` (
   `result_id` INT NOT NULL,
@@ -300,7 +303,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `hospital`.`user_token`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `hospital`.`user_token` ;
 
 CREATE TABLE IF NOT EXISTS `hospital`.`user_token` (
   `token_id` INT NOT NULL,
