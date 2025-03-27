@@ -20,7 +20,7 @@ USE `hospital` ;
 DROP TABLE IF EXISTS `hospital`.`user` ;
 
 CREATE TABLE IF NOT EXISTS `hospital`.`user` (
-  `user_id` INT NOT NULL,
+  `user_id` BIGINT NOT NULL,
   `first_name` VARCHAR(25) NOT NULL,
   `last_name` VARCHAR(50) NOT NULL,
   `phone_number` INT NOT NULL,
@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS `hospital`.`visitor` ;
 CREATE TABLE IF NOT EXISTS `hospital`.`visitor` (
   `visitor_id` INT NOT NULL,
   `ip_address` VARCHAR(45) NULL,
-  `user_id` INT NOT NULL,
+  `user_id` BIGINT NOT NULL,
   PRIMARY KEY (`visitor_id`, `user_id`),
   INDEX `fk_visitor_user1_idx` (`user_id` ASC) ,
   CONSTRAINT `fk_visitor_user1`
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `hospital`.`staff` (
   `staff_id` INT NOT NULL,
   `employee_type` VARCHAR(45) NULL,
   `date_employed` DATE NULL,
-  `user_id` INT NOT NULL,
+  `user_id` BIGINT NOT NULL,
   PRIMARY KEY (`staff_id`, `user_id`),
   INDEX `fk_staff_user1_idx` (`user_id` ASC) ,
   CONSTRAINT `fk_staff_user1`
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `hospital`.`patient` (
   `billing_info` VARCHAR(45) NULL,
   `insurance_info` VARCHAR(45) NULL,
   `ssn` INT(11) NOT NULL,
-  `user_id` INT NOT NULL,
+  `user_id` BIGINT NOT NULL,
   PRIMARY KEY (`patient_id`, `user_id`),
   INDEX `fk_patient_user_idx` (`user_id` ASC) ,
   CONSTRAINT `fk_patient_user`
@@ -307,7 +307,7 @@ CREATE TABLE IF NOT EXISTS `hospital`.`user_token` (
   `selector` VARCHAR(255) NOT NULL,
   `hashed_validator` VARCHAR(255) NOT NULL,
   `expiry` DATETIME NOT NULL,
-  `user_id` INT NOT NULL,
+  `user_id` BIGINT NOT NULL,
   PRIMARY KEY (`token_id`),
   INDEX `fk_user_token_user1_idx` (`user_id` ASC) ,
   CONSTRAINT `fk_user_token_user1`

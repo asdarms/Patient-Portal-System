@@ -3,7 +3,7 @@ function OpenCon()
     {
         $dbhost = "localhost";
         $dbuser = "root";
-        $dbpass = "";
+        $dbpass = "rootPassword!";
         $db = "hospital";
         if(!$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $db))
         {
@@ -49,7 +49,7 @@ function registerUser($conn): int{
             return 2;
         }
     }
-    sleep($rand_level);
+    sleep(seconds: $rand_level);
     return 3;
 }
 
@@ -176,7 +176,7 @@ function parseToken(string $token): ?array
 
 function insertUserToken($conn, int $userID, string $selector, string $hashed_validator, string $expiry): bool
 {
-    $sql = "INSERT INTO user_tokens(user_id, selector, hashed_validator, expiry)
+    $sql = "INSERT INTO user_token(user_id, selector, hashed_validator, expiry)
             VALUES('$userID', '$selector', '$hashed_validator', '$expiry')";
     
     if(mysqli_query($conn, $sql)){
@@ -189,7 +189,7 @@ function findUserTokenBySelector($conn, string $selector)
 {
 
     $sql = "SELECT token_id, selector, hashed_validator, user_id, expiry
-                FROM user_tokens
+                FROM user_token
                 WHERE selector = '$selector' AND
                     expiry >= now()
                 LIMIT 1";
@@ -204,7 +204,7 @@ function findUserTokenBySelector($conn, string $selector)
 
 function deleteUserToken($conn, int $user_id): bool
 {
-    $sql = "DELETE FROM user_tokens WHERE user_id = '$user_id'";
+    $sql = "DELETE FROM user_token WHERE user_id = '$user_id'";
 
     if(mysqli_query($conn, $sql)){
         return true;
@@ -223,7 +223,7 @@ function findUserByToken($conn, string $token)
 
     $sql = "SELECT user.user_id, username
             FROM user
-            INNER JOIN user_tokens ON user_tokens.user_id = user.user_id
+            INNER JOIN user_token ON user_token.user_id = user.user_id
             WHERE selector = '$tokens[0]' AND
                 expiry > now()
             LIMIT 1";
