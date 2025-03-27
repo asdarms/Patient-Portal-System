@@ -21,14 +21,14 @@ DROP TABLE IF EXISTS `hospital`.`user` ;
 
 CREATE TABLE IF NOT EXISTS `hospital`.`user` (
   `user_id` INT NOT NULL,
-  `first_name` VARCHAR(45) NOT NULL,
-  `last_name` VARCHAR(45) NOT NULL,
+  `first_name` VARCHAR(25) NOT NULL,
+  `last_name` VARCHAR(50) NOT NULL,
   `phone_number` INT NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `username` VARCHAR(45) NOT NULL,
-  `password_hash` VARCHAR(45) NOT NULL,
-  `bio` VARCHAR(45) NULL,
-  `profile_pic` TINYTEXT NULL,
+  `email` VARCHAR(50) NOT NULL,
+  `username` VARCHAR(25) NOT NULL,
+  `password_hash` VARCHAR(60) NOT NULL,
+  `bio` MEDIUMTEXT NULL,
+  `profile_pic` LONGBLOB NULL,
   PRIMARY KEY (`user_id`))
 ENGINE = InnoDB;
 
@@ -108,6 +108,7 @@ CREATE TABLE IF NOT EXISTS `hospital`.`patient` (
   `medical_data` VARCHAR(45) NULL,
   `billing_info` VARCHAR(45) NULL,
   `insurance_info` VARCHAR(45) NULL,
+  `ssn` INT(11) NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`patient_id`, `user_id`),
   INDEX `fk_patient_user_idx` (`user_id` ASC) ,
@@ -303,9 +304,9 @@ DROP TABLE IF EXISTS `hospital`.`user_token` ;
 
 CREATE TABLE IF NOT EXISTS `hospital`.`user_token` (
   `token_id` INT NOT NULL,
-  `selector` VARCHAR(45) NOT NULL,
-  `hashed_validator` VARCHAR(45) NOT NULL,
-  `expiry` VARCHAR(45) NOT NULL,
+  `selector` VARCHAR(255) NOT NULL,
+  `hashed_validator` VARCHAR(255) NOT NULL,
+  `expiry` DATETIME NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`token_id`),
   INDEX `fk_user_token_user1_idx` (`user_id` ASC) ,

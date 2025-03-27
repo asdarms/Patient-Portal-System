@@ -3,8 +3,8 @@ function OpenCon()
     {
         $dbhost = "localhost";
         $dbuser = "root";
-        $dbpass = "rootPassword!";
-        $db = "patient";
+        $dbpass = "";
+        $db = "hospital";
         if(!$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $db))
         {
             return (''. mysqli_connect_error());
@@ -19,9 +19,9 @@ function CloseCon($conn)
     }
 
 function registerUser($conn): int{
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
-    $userName = $_POST['userName'];
+    $first_name = $_POST['firstName'];
+    $last_name = $_POST['lastName'];
+    $username = $_POST['userName'];
     $email = $_POST['email'];
     $phoneNumber = $_POST['phoneNumber'];
     $password = $_POST['password'];
@@ -32,12 +32,12 @@ function registerUser($conn): int{
     if(strlen($password) > 7){
         if(validatePhoneNumber($phoneNumber) !== false){
             $phoneNumber = validatePhoneNumber($phoneNumber);
-            if(mysqli_num_rows(mysqli_query($conn, "select * from User WHERE phoneNumber='$phoneNumber'")) == 0){
+            if(mysqli_num_rows(mysqli_query($conn, "select * from User WHERE phone_number='$phoneNumber'")) == 0){
                 $hash = password_hash($password, `PASSWORD_BCRYPT`);
                 do{
                     $userID = random_int(0, PHP_INT_MAX);
-                }while(mysqli_num_rows(mysqli_query($conn, "select * from User WHERE userID = '$userID'"))>0);
-                $query = "insert into User (userID, firstname, lastName, userName, email, phoneNumber, passwordHash) values ('$userID', '$firstName', '$lastName', '$userName', '$email', '$phoneNumber', '$hash')";
+                }while(mysqli_num_rows(mysqli_query($conn, "select * from User WHERE user_id = '$userID'"))>0);
+                $query = "insert into User (user_id, first_name, last_name, username, email, phone_number, password_hash) values ('$userID', '$first_name', '$last_name', '$username', '$email', '$phoneNumber', '$hash')";
                     if (mysqli_query($conn, $query)){
                         sleep($rand_level);
                         return 0;
@@ -94,7 +94,7 @@ function loginUser($conn): int{
         //check if password for it is correct
         
         $userData = mysqli_fetch_array($userData);
-        if(password_verify($password, $userData['passwordHash'])){
+        if(password_verify($password, $userData['password_hash'])){
             //if it is correct
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
@@ -102,7 +102,7 @@ function loginUser($conn): int{
             
             // Set user data in session
             if($_POST['rememberMe'] == 'checked'){
-                rememberMe($conn, $userData['userID'], 60);
+                rememberMe($conn, $userData['user_id'], 60);
             }
             setUser($userData);
             sleep($rand_level);
@@ -117,7 +117,7 @@ function loginUser($conn): int{
 
 function isUserLoggedIn($conn): bool
 {
-    if(isset($_SESSION['userName'])){
+    if(isset($_SESSION['username'])){
         return true;
     }
     // check the remember_me in cookie
@@ -176,7 +176,7 @@ function parseToken(string $token): ?array
 
 function insertUserToken($conn, int $userID, string $selector, string $hashed_validator, string $expiry): bool
 {
-    $sql = "INSERT INTO user_tokens(userID, selector, hashed_validator, expiry)
+    $sql = "INSERT INTO user_tokens(user_id, selector, hashed_validator, expiry)
             VALUES('$userID', '$selector', '$hashed_validator', '$expiry')";
     
     if(mysqli_query($conn, $sql)){
@@ -188,7 +188,7 @@ function insertUserToken($conn, int $userID, string $selector, string $hashed_va
 function findUserTokenBySelector($conn, string $selector)
 {
 
-    $sql = "SELECT id, selector, hashed_validator, userID, expiry
+    $sql = "SELECT token_id, selector, hashed_validator, user_id, expiry
                 FROM user_tokens
                 WHERE selector = '$selector' AND
                     expiry >= now()
@@ -204,7 +204,7 @@ function findUserTokenBySelector($conn, string $selector)
 
 function deleteUserToken($conn, int $user_id): bool
 {
-    $sql = "DELETE FROM user_tokens WHERE userID = '$user_id'";
+    $sql = "DELETE FROM user_tokens WHERE user_id = '$user_id'";
 
     if(mysqli_query($conn, $sql)){
         return true;
@@ -221,9 +221,9 @@ function findUserByToken($conn, string $token)
         return null;
     }
 
-    $sql = "SELECT user.userID, userName
+    $sql = "SELECT user.user_id, username
             FROM user
-            INNER JOIN user_tokens ON user_tokens.userID = user.userID
+            INNER JOIN user_tokens ON user_tokens.user_id = user.user_id
             WHERE selector = '$tokens[0]' AND
                 expiry > now()
             LIMIT 1";
@@ -253,8 +253,8 @@ function setUser(array $user): bool
     // prevent session fixation attack
     if (session_regenerate_id()) {
         // set username & id in the session
-        $_SESSION['userName'] = $user['userName'];
-        $_SESSION['userID'] = $user['userID'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['user_id'] = $user['user_id'];
         return true;
     }
 
@@ -285,10 +285,10 @@ function logout($conn): void
     if (isUserLoggedIn($conn)) {
 
         // delete the user token
-        deleteUserToken($conn, $_SESSION['userID']);
+        deleteUserToken($conn, $_SESSION['user_id']);
 
         // delete session
-        unset($_SESSION['userName'], $_SESSION['userID`']);
+        unset($_SESSION['username'], $_SESSION['user_id`']);
 
         // remove the remember_me cookie
         if (isset($_COOKIE['rememberMe'])) {
