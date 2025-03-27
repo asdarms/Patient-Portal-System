@@ -9,7 +9,7 @@ How to setup:
 2. Copy project files into xampp/htdocs/hospital. The project folder should look like this (ignore .git for now):
 ![Folder structure of project](folder.png)
 3. Run the Apache and SQL servers in XAMPP
-4. Go to PHPMyAdmin from XAMPP
+4. Go to PHPMyAdmin from XAMPP (Admin button next to MySQL)
 5. On main page, go to SQL tab and copy the code from DatabaseGenerationScript.sql into the console, like so:
 ![Command to create database](sql.png)
 7. Hit Ctrl+Enter to run the commands, this should create the database with all appropriate tables
