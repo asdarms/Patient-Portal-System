@@ -1,0 +1,7 @@
+#General extension ignores
+.DS_Store
+Thumbs.db
+.vscode/
+
+#Specific ignores
+.pass
