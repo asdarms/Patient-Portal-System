@@ -4,4 +4,4 @@ Thumbs.db
 .vscode/
 
 #Specific ignores
-.pass
+dbpass.pass

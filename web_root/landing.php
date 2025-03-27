@@ -1,7 +1,6 @@
 <?php require 'header.php';
 require 'functions.php';
 $conn = OpenCon();
-
 if(!isUserLoggedIn($conn)){
     Header("Location: login.php");
 }
