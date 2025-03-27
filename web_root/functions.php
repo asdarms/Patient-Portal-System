@@ -3,7 +3,7 @@ function OpenCon()
     {
         $dbhost = "localhost";
         $dbuser = "root";
-        $dbpass = "rootPassword!";
+        $dbpass = "";
         $db = "hospital";
         if(!$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $db))
         {
