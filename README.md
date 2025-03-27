@@ -6,18 +6,21 @@ HTML, CSS, and some JS was used from https://startbootstrap.com/previews/sb-admi
 
 How to setup:
 1. Install XAMPP
-2. Copy project files into xampp/htdocs/hospital
+2. Copy project files into xampp/htdocs/hospital. The project folder should look like this (ignore .git for now):
+![Folder structure of project](folder.png)
 3. Run the Apache and SQL servers in XAMPP
 4. Go to PHPMyAdmin from XAMPP
-5. On main page, go to SQL tab and copy the code from DatabaseGenerationScript.sql into the console
-6. Hit Ctrl+Enter to run the commands, this should create the database with all appropriate tables
-7. Navigate to localhost/hospital/web_root/login.php to access site
+5. On main page, go to SQL tab and copy the code from DatabaseGenerationScript.sql into the console, like so:
+![Command to create database](sql.png)
+7. Hit Ctrl+Enter to run the commands, this should create the database with all appropriate tables
+8. Navigate to localhost/hospital/web_root/login.php to access site
 
 If you want the project to integrate with GitHub, follow these steps:
-1. Download GitHub Desktoo
+1. Download GitHub Desktop
 2. From GitHub Dekstop, clone this repository to any folder
 3. Navigate to that folder and cut the .git folder
-4. Move the .git folder to xampp/htdocs/hospital
+4. Move the .git folder to xampp/htdocs/hospital, like so:
+![Folder structure of project](folder.png)
 5. Go back to GitHub Desktop, it will now say the project has moved and cannot be found
 6. Click the "Locate Project" option and navigate to xampp/htdocs/hospital
 7. GitHub Desktop will now see this directory as the location of the project, so it can be updated live with GitHub commits
