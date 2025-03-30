@@ -103,7 +103,7 @@ function registerUser($conn): int
     if (strlen($password) > 7) {
         if (validatePhoneNumber($phoneNumber) !== false) {
             $phoneNumber = validatePhoneNumber($phoneNumber);
-            $userData = getDatafromTable($conn, "user", ["phone_number"=>$phoneNumber]);
+            $userData = getDatafromTable($conn, "user", ["phone_number"=>$phoneNumber, "email"=>$email, "username"=>$username], "OR");
             if (sizeof($userData) == 0) {
                 $hash = password_hash($password, `PASSWORD_BCRYPT`);
                 do {
