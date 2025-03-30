@@ -4,7 +4,7 @@ $conn = OpenCon();
 if(!isUserLoggedIn($conn)){
     Header("Location: login.php");
 }
-
+$firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username']])[0]['first_name'];
 
 ?>
 <!DOCTYPE html>
@@ -24,7 +24,7 @@ if(!isUserLoggedIn($conn)){
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Hello!</a>
+            <a class="navbar-brand ps-3" href="index.html">Hello, <?php echo $firstName ?>!</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
