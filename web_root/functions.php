@@ -22,6 +22,71 @@ function CloseCon($conn)
     $conn->close();
 }
 
+function getDatafromTable(mysqli $conn, string $table, array $searchConditions, $booleanOperations = "AND", $query = "select * from "): int | array
+{   
+    
+
+    $type = gettype($booleanOperations);
+    #check for data type
+    if($type == "array"){
+        if(sizeof($booleanOperations) > sizeof($searchConditions)){
+            printf("There should be more search conditions than boolean operations");
+            return 100;
+        }
+        #check for valid boolean operations
+        for($i = 0; $i < sizeof($booleanOperations); $i++){
+            if(!in_array(strtoupper($booleanOperations[$i]), ["OR", "AND", "XOR"])){
+                printf("Error getting data: incorrect boolean operator in '$booleanOperations'");
+                return 101;
+            }
+        }
+
+        #apply default AND
+        for($i = 0; $i < sizeof($searchConditions); $i++){
+            if($i < sizeof($booleanOperations)){
+                $operations[$i] = strtoupper($booleanOperations[$i]);
+            } else {
+                $operations[$i] = "AND";
+            }
+        }
+    } else if (!($type == "string")){
+        printf("Error incorrect data type for '$booleanOperations'");
+        return 103;
+    } else {
+        if(in_array(strtoupper($booleanOperations), ["OR", "AND", "XOR"])){
+            for($i = 0; $i < sizeof($searchConditions); $i++){
+                $operations[$i] = strtoupper($booleanOperations);
+            }
+        }
+    }
+
+    $query .= $table;
+
+    if(sizeof($searchConditions) > 0){
+        $query .= " WHERE ";
+    }
+
+    $i = 0;
+    foreach($searchConditions as $key => $value){
+        $query .= $key . " = " . '\'' . $value . '\'';
+        $query .= ' ' . $operations[$i] . ' ';
+        $i++;
+    }
+    $query = substr($query, 0, strlen($query)-(strlen($operations[sizeof($operations)-1])+2)) . ';';
+    $result = mysqli_query($conn, $query);
+    if($result === false){
+        printf("Error message: %s\n", mysqli_error($conn));
+        printf($query);
+        return 201; 
+    } else if($result === true){
+        return 1;
+    }
+    $results = mysqli_fetch_all($result, MYSQLI_BOTH);
+    // printf($query);
+    // die();
+    return $results;
+}
+
 function registerUser($conn): int
 {
     $first_name = $_POST['firstName'];
@@ -34,15 +99,17 @@ function registerUser($conn): int
     $rand_level = rand(1, 10);
     $rand_level = $rand_level / 100;
 
+
     if (strlen($password) > 7) {
         if (validatePhoneNumber($phoneNumber) !== false) {
             $phoneNumber = validatePhoneNumber($phoneNumber);
-            if (mysqli_num_rows(mysqli_query($conn, "select * from User WHERE phone_number='$phoneNumber'")) == 0) {
+            $userData = getDatafromTable($conn, "user", ["phone_number"=>$phoneNumber]);
+            if (sizeof($userData) == 0) {
                 $hash = password_hash($password, `PASSWORD_BCRYPT`);
                 do {
                     $userID = random_int(0, PHP_INT_MAX);
-                } while (mysqli_num_rows(mysqli_query($conn, "select * from User WHERE user_id = '$userID'")) > 0);
-                $query = "insert into User (user_id, first_name, last_name, username, email, phone_number, password_hash) values ('$userID', '$first_name', '$last_name', '$username', '$email', '$phoneNumber', '$hash')";
+                } while (sizeof(getDatafromTable($conn, "user", ["user_id" => $userID])) > 0);
+                $query = "insert into user (user_id, first_name, last_name, username, email, phone_number, password_hash) values ('$userID', '$first_name', '$last_name', '$username', '$email', '$phoneNumber', '$hash')";
                 if (mysqli_query($conn, $query)) {
                     sleep($rand_level);
                     return 0;
@@ -98,12 +165,16 @@ function loginUser($conn): int
     $rand_level = rand(1, 10);
     $rand_level = $rand_level / 100;
 
+    $userData = getDatafromTable($conn, "user", ["email" => $email]);
+    // printf($userData);
     //check if email exists
-    if (mysqli_num_rows($userData = mysqli_query($conn, "select * from user WHERE email='$email'")) > 0) {
+    if (sizeof($userData) > 0) {
         //if it does exist
         //check if password for it is correct
 
-        $userData = mysqli_fetch_array($userData);
+        $userData = $userData[0];
+        // printf($userData['password_hash']);
+        // die();
         if (password_verify($password, $userData['password_hash'])) {
             //if it is correct
             if (session_status() === PHP_SESSION_NONE) {
