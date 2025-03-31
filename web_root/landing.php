@@ -20,7 +20,6 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
-    <body class="bg-primary">
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -39,8 +38,8 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Billing</a></li>
+                        <li><a class="dropdown-item" href="settings.php">Settings</a></li>
+                        <li><a class="dropdown-item" href="billing.php">Billing</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>
@@ -51,17 +50,17 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
 
 
             <div id="layoutSidenav_nav">
+                
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
 
 
                     <div class="sb-sidenav-menu">
 
-
+                        
                         <div class="nav">
 
-
-                            <div class="sb-sidenav-menu-heading">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-sidenav-menu-heading pt-2 pb-0">
+                                <a class="nav-link collapsed pb-0" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                     Core
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -79,15 +78,15 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
                             </div>
 
 
-                            <div class="sb-sidenav-menu-heading">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-sidenav-menu-heading pt-0 pb-0">
+                                <a class="nav-link collapsed pb-0" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                     Pages
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
                             </div>
 
-                            
+
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="login.php">Login</a>
@@ -105,39 +104,81 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
 
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        <?php echo $_SESSION['username'];?>
                     </div>
                 </nav>
             </div>
 
 
             <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">Sidenav Light</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Sidenav Light</li>
-                        </ol>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                This page is an example of using the light side navigation option. By appending the
-                                <code>.sb-sidenav-light</code>
-                                class to the
-                                <code>.sb-sidenav</code>
-                                class, the side navigation will take on a light color scheme. The
-                                <code>.sb-sidenav-dark</code>
-                                is also available for a darker option.
-                            </div>
-                        </div>
-                    </div>
-                </main>
+                <cust id="calendar" style="padding-left: 1rem"></cust>
                 <?php require_once 'footer.php'?>
             </div>
 
 
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script>
+        <script>
+            $(function (e) {
+                var calendar = $("#calendar").calendarGC({
+                dayBegin: 0,
+                prevIcon: '&#x3c;',
+                nextIcon: '&#x3e;',
+                onPrevMonth: function (e) {
+                    console.log("prev");
+                    console.log(e);
+                },
+                onNextMonth: function (e) {
+                    console.log("next");
+                    console.log(e);
+                },
+                events: getHoliday(),
+                onclickDate: function (e, data) {
+                    console.log(e, data);
+                }
+                });
+            });
+
+            function getHoliday() {
+                var d = new Date();
+                var totalDay = new Date(d.getFullYear(), d.getMonth(), 0).getDate();
+                var events = [];
+
+                for (var i = 1; i <= totalDay; i++) {
+                var newDate = new Date(d.getFullYear(), d.getMonth(), i);
+                // See the below jquery for custom events
+
+                // if (newDate.getDay() == 0) {   //if Sunday
+                //     events.push({
+                //     date: newDate,
+                //     eventName: "Sunday free",
+                //     className: "badge bg-danger",
+                //     onclick(e, data) {
+                //         console.log(data);
+                //     },
+                //     dateColor: "red"
+                //     });
+                // }
+                // if (newDate.getDay() == 6) {   //if Saturday
+                //     events.push({
+                //     date: newDate,
+                //     eventName: "Saturday free",
+                //     className: "badge bg-danger",
+                //     onclick(e, data) {
+                //         console.log(data);
+                //     },
+                //     dateColor: "red"
+                //     });
+                // }
+
+                }
+                return events;
+            }
+
+            getHoliday()
+        </script>
     </body>
         
