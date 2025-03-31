@@ -164,9 +164,10 @@ function loginUser($conn): int
     $password = $_POST['password'];
     $rand_level = rand(1, 10);
     $rand_level = $rand_level / 100;
+    $rememberMe = $_POST['rememberMe'];
 
     $userData = getDatafromTable($conn, "user", ["email" => $email]);
-    // printf($userData);
+
     //check if email exists
     if (sizeof($userData) > 0) {
         //if it does exist
@@ -182,7 +183,7 @@ function loginUser($conn): int
             }
 
             // Set user data in session
-            if ($_POST['rememberMe'] == 'checked') {
+            if ($rememberMe == "checked") {
                 rememberMe($conn, $userData['user_id'], 60);
             }
             setUser($userData);
@@ -259,8 +260,12 @@ function parseToken(string $token): ?array
 
 function insertUserToken($conn, int $userID, string $selector, string $hashed_validator, string $expiry): bool
 {
-    $sql = "INSERT INTO user_token(user_id, selector, hashed_validator, expiry)
-            VALUES('$userID', '$selector', '$hashed_validator', '$expiry')";
+    do {
+        $tokenID = random_int(0, 10000000);
+    } while (sizeof(getDatafromTable($conn, "user_token", ["token_id" => $tokenID])) > 0);
+
+    $sql = "INSERT INTO user_token(token_id, user_id, selector, hashed_validator, expiry)
+            VALUES('$tokenID', '$userID', '$selector', '$hashed_validator', '$expiry')";
 
     if (mysqli_query($conn, $sql)) {
         return true;
@@ -361,6 +366,7 @@ function rememberMe($conn, int $user_id, int $day = 30)
 
     if (insertUserToken($conn, $user_id, $selector, $hash_validator, $expiry)) {
         setcookie('rememberMe', $token, $expired_seconds);
+
     }
 }
 
