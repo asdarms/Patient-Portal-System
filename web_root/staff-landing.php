@@ -4,7 +4,17 @@ $conn = OpenCon();
 if(!isUserLoggedIn($conn)){
     Header("Location: login.php");
 }
-$firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username']])[0]['first_name'];
+$userData = getDatafromTable($conn, "user", ["username" => $_SESSION['username']])[0];
+$firstName = $userData['first_name'];
+$staffData = getDatafromTable($conn, "staff", ["user_id" => $userData['user_id']])[0];
+$shiftData = getDatafromTable($conn, "shift", ["staff_id" => $staffData['staff_id']]);
+$shifts = [];
+for($i = 0; $i < sizeof($shiftData); $i++){
+    for($j = 0; $j < 5; $j++){
+        array_push($shifts,$shiftData[$i][$j]);
+    }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -22,13 +32,13 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
     </head>
     <style>
         .gc-calendar table.calendar td {
-            height: 86px!important;
+            height: 105px!important;
         }
     </style>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="landing.php">Patient Portal System</a>
+            <a class="navbar-brand ps-3" href="landing.php">Staff Portal System</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -127,6 +137,8 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script>
         <script>
+            var shifts = <?php echo json_encode($shiftData); ?> 
+            
             $(function (e) {
                 var calendar = $("#landing").calendarGC({
                 dayBegin: 0,
@@ -151,7 +163,7 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
                 var d = new Date();
                 var totalDay = new Date(d.getFullYear(), d.getMonth(), 0).getDate();
                 var events = [];
-
+                
                 for (var i = 1; i <= totalDay; i++) {
                 var newDate = new Date(d.getFullYear(), d.getMonth(), i);
                 // See the below jquery for custom events
@@ -179,6 +191,26 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
                 //     });
                 // }
 
+                }
+                for(i = 0; i < shifts.length; i++){
+                    events.push({
+                        date: new Date(shifts[i]['start_time']),
+                        eventName: "Shift Start",
+                        className: "badge bg-primary",
+                        onclick(e, data) {
+                            console.log(data);
+                        },
+                        dateColor: "blue"
+                        });
+                    events.push({
+                        date: new Date(shifts[i]['end_time']),
+                        eventName: "Shift End",
+                        className: "badge bg-primary",
+                        onclick(e, data) {
+                            console.log(data);
+                        },
+                        dateColor: "blue"
+                    });
                 }
                 return events;
             }
