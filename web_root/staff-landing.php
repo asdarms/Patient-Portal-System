@@ -127,7 +127,7 @@ for($i = 0; $i < sizeof($shiftData); $i++){
 
             <div id="layoutSidenav_content">
                 <cust id="landing" style="padding-left: 1rem; "></cust>
-                <?php require_once 'footer.php'?>
+                <?php require_once 'footer.php';?>
             </div>
 
 
@@ -137,6 +137,7 @@ for($i = 0; $i < sizeof($shiftData); $i++){
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script>
         <script>
+            var shifts = <?php echo json_encode($shiftData); ?>;
             $(function (e) {
                 var calendar = $("#landing").calendarGC({
                 dayBegin: 0,
@@ -189,9 +190,35 @@ for($i = 0; $i < sizeof($shiftData); $i++){
                 // }
 
                 }
+            
+                for(i = 0; i < shifts.length; i++){
+
+
+                    events.push({
+                        date: new Date(shifts[i]['start_time']),
+                        eventName: "Shift Start",
+                        className: "badge bg-primary",
+                        onclick(e, data) {
+                            console.log(data);
+                        },
+                        dateColor: "blue"
+                        });
+
+
+                    events.push({
+
+
+                        date: new Date(shifts[i]['end_time']),
+                        eventName: "Shift End",
+                        className: "badge bg-primary",
+                        onclick(e, data) {
+                            console.log(data);
+                        },
+                        dateColor: "blue"
+                    });
                 return events;
             }
-
+            }
             getHoliday()
         </script>
     </body>
