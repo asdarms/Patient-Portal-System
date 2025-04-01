@@ -2,12 +2,11 @@
 
 <head>
     <title>Patients</title>
-    <link href="../css/styles.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="../css/styles.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
-    <?php require_once 'functions.php' ?>
+    <?php require_once 'functions.php'?>
     <table class="table">
         <thead class="thead-light">
             <tr>
@@ -19,7 +18,7 @@
         </thead>
         <tbody>
             <?php
-
+            
             $conn = OpenCon();
             if ($result = $conn->query("SELECT * FROM patient")) {
             }
