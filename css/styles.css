@@ -11322,7 +11322,7 @@ From https://github.com/nggepe/calendar-gc */
 }
 
 .gc-calendar table.calendar td {
-  height: 100px!important;
+  height: 150px;
   position: relative!important;
   padding-top: 3px!important;
   vertical-align: top!important;

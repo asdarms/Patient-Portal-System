@@ -20,6 +20,11 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
+    <style>
+        .gc-calendar table.calendar td {
+            height: 86px!important;
+        }
+    </style>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -28,10 +33,10 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
+                <!-- <div class="input-group"> -->
+                    <!-- : Removed until properly implemented : <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" /> -->
+                    <!-- <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button> -->
+                <!-- </div> -->
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -111,7 +116,7 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
 
 
             <div id="layoutSidenav_content">
-                <cust id="calendar" style="padding-left: 1rem"></cust>
+                <cust id="landing" style="padding-left: 1rem; "></cust>
                 <?php require_once 'footer.php'?>
             </div>
 
@@ -123,7 +128,7 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
         <script src="../js/scripts.js"></script>
         <script>
             $(function (e) {
-                var calendar = $("#calendar").calendarGC({
+                var calendar = $("#landing").calendarGC({
                 dayBegin: 0,
                 prevIcon: '&#x3c;',
                 nextIcon: '&#x3e;',
