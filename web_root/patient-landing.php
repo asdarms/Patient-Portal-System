@@ -73,7 +73,7 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
                             </div>
 
 
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <div class="collapse show" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion" >
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="landing.php">Dashboard</a>
                                     <a class="nav-link" href="appointments.php">Appointments</a>
