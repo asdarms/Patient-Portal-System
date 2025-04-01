@@ -4,7 +4,17 @@ $conn = OpenCon();
 if(!isUserLoggedIn($conn)){
     Header("Location: login.php");
 }
-$firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username']])[0]['first_name'];
+$userData = getDatafromTable($conn, "user", ["username" => $_SESSION['username']])[0];
+$firstName = $userData['first_name'];
+$staffData = getDatafromTable($conn, "staff", ["user_id" => $userData['user_id']])[0];
+$shiftData = getDatafromTable($conn, "shift", ["staff_id" => $staffData['staff_id']]);
+$shifts = [];
+for($i = 0; $i < sizeof($shiftData); $i++){
+    for($j = 0; $j < 5; $j++){
+        array_push($shifts,$shiftData[$i][$j]);
+    }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -151,7 +161,6 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
                 var d = new Date();
                 var totalDay = new Date(d.getFullYear(), d.getMonth(), 0).getDate();
                 var events = [];
-
                 for (var i = 1; i <= totalDay; i++) {
                 var newDate = new Date(d.getFullYear(), d.getMonth(), i);
                 // See the below jquery for custom events
