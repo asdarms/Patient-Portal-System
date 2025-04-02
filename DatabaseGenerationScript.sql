@@ -59,6 +59,7 @@ INSERT INTO `appointment` (`appointment_id`, `datetime`, `appointment_type`, `ro
 INSERT INTO `appointment` (`appointment_id`, `datetime`, `appointment_type`, `room_number`, `notes`, `patient_id`, `staff_id`, `bill_id`) VALUES (841974, '2001-12-27 12:39:29', 'a', '778', 'Eum tenetur autem quas. Quidem accusamus modi consequatur.', 4475621, 73579264, 577832);
 INSERT INTO `appointment` (`appointment_id`, `datetime`, `appointment_type`, `room_number`, `notes`, `patient_id`, `staff_id`, `bill_id`) VALUES (881982, '1983-08-13 04:19:08', 'a', '669', 'Cum aut velit voluptas quae voluptatem eum. Doloribus aut tempora sunt ut natus sit. Et omnis quo sit aperiam vel omnis.', 4432435, 69455541, 501402);
 INSERT INTO `appointment` (`appointment_id`, `datetime`, `appointment_type`, `room_number`, `notes`, `patient_id`, `staff_id`, `bill_id`) VALUES (962915, '1989-03-17 20:16:50', 'c', '122', 'Error aut nesciunt tempora excepturi. Animi quos occaecati dolor quidem cumque. Autem sed itaque error. Error quidem consequuntur facere voluptatum autem.', 3368421, 36076157, 270449);
+INSERT INTO `appointment` (`appointment_id`, `datetime`, `appointment_type`, `room_number`, `notes`, `patient_id`, `staff_id`, `bill_id`) VALUES (1, '2025-04-01 14:00:00', 'Checkup', '69', 'Test appointment.', 2, 1, 1);
 
 
 --
@@ -102,6 +103,7 @@ INSERT INTO `bill` (`bill_id`, `date`, `amount`, `description`, `notes`, `patien
 INSERT INTO `bill` (`bill_id`, `date`, `amount`, `description`, `notes`, `patient_id`, `staff_id`) VALUES (788936, '1979-04-16 07:58:01', '2170.78', 'Ullam facere quod ea itaque provident.', 'Consequatur ipsum nobis modi. Ut quam voluptatem modi maxime. Ad rerum aperiam explicabo consequuntur est nobis eos. Modi nihil facere et minus ut velit quia.', 1757608, 20350543);
 INSERT INTO `bill` (`bill_id`, `date`, `amount`, `description`, `notes`, `patient_id`, `staff_id`) VALUES (956592, '1991-09-25 17:57:54', '13534.03', 'Asperiores suscipit qui rerum.', 'Numquam fuga harum nulla voluptates quod explicabo quia. Tempora sed et et aut et voluptatem.', 1262631, 19289979);
 INSERT INTO `bill` (`bill_id`, `date`, `amount`, `description`, `notes`, `patient_id`, `staff_id`) VALUES (957682, '1994-11-01 01:41:43', '369.14', 'Consequatur dolores assumenda nam iusto.', 'Fuga repudiandae odit sed delectus ut minima alias eaque. Quae aut qui consequuntur quisquam et et sit. Ut rerum occaecati quod. Laborum exercitationem voluptas commodi ipsum quia consequatur.', 981859, 17352871);
+INSERT INTO `bill` (`bill_id`, `date`, `amount`, `description`, `notes`, `patient_id`, `staff_id`) VALUES (1, '2025-03-01 14:00:00', '420.69', 'Test bill.', 'This is a test bill.', 2, 1);
 
 
 --
@@ -126,6 +128,8 @@ CREATE TABLE `lab_order` (
   CONSTRAINT `fk_lab_order_staff1` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
+INSERT INTO `lab_order` (`order_id`, `location`, `type`, `estimated_cost`, `notes`, `appointment_id`, `patient_id`, `staff_id`) VALUES ('1', 'hospital', 'appointment issued lab order', '69420', 'this is a test lab order', 1, 2, 1) 
+
 --
 -- TABLE STRUCTURE FOR: lab_result
 --
@@ -142,6 +146,8 @@ CREATE TABLE `lab_result` (
   KEY `fk_lab_result_lab_order1_idx` (`order_id`),
   CONSTRAINT `fk_lab_result_lab_order1` FOREIGN KEY (`order_id`) REFERENCES `lab_order` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+INSERT INTO `lab_result` (`result_id`, `tests`, `results`, `notes`, `order_id`) VALUES (1, 'all the tests', 'only bad results', 'the patient is dead', 1) 
 
 -- 
 -- TABLE STRUCTURE FOR: patient
@@ -185,6 +191,7 @@ INSERT INTO `patient` (`patient_id`, `date_of_birth`, `sex`, `address`, `emergen
 INSERT INTO `patient` (`patient_id`, `date_of_birth`, `sex`, `address`, `emergency_contact`, `medical_data`, `billing_info`, `insurance_info`, `ssn`, `user_id`) VALUES (8410501, '2023-04-04', '3', '4804 Shania View\nPort Deonshire, LA 37301', '+02(0)4107033123', 'Id et dolor numquam id ut quo dolorum rem.', 'Libero quia quidem aut illo illo est.', 'Perferendis ducimus minima qui et.', 53, '416422253');
 INSERT INTO `patient` (`patient_id`, `date_of_birth`, `sex`, `address`, `emergency_contact`, `medical_data`, `billing_info`, `insurance_info`, `ssn`, `user_id`) VALUES (9590994, '1982-05-24', '1', '05848 Rau Shoal\nNew Florian, NE 80390-7258', '08991801269', 'Voluptas debitis ipsam quo consectetur ut.', 'Libero sit corrupti ut quaerat illo neque.', 'Vel qui tempore autem aliquam quasi.', 520, '385931281');
 INSERT INTO `patient` (`patient_id`, `date_of_birth`, `sex`, `address`, `emergency_contact`, `medical_data`, `billing_info`, `insurance_info`, `ssn`, `user_id`) VALUES (9969419, '2004-07-31', '1', '31490 Conn Tunnel Apt. 536\nAurelioshire, UT 66524-7681', '825-063-1165x56606', 'Dolorum delectus quo placeat est et.', 'Quis nemo velit repudiandae ipsa.', 'Ut sunt et minima iure quas ex.', 1, '918438895');
+INSERT INTO `patient` (`patient_id`, `date_of_birth`, `sex`, `address`, `emergency_contact`, `medical_data`, `billing_info`, `insurance_info`, `ssn`, `user_id`) VALUES (2, '2000-01-01', 'male', '1 John Marshall Drive\nHuntington, WV, 25755', '3043043040', 'Medical data.', 'Billing info.', 'Insurance info.', 123456789, '2');
 
 
 --
@@ -232,62 +239,7 @@ INSERT INTO `prescription` (`prescription_id`, `name`, `date_prescribed`, `dose`
 INSERT INTO `prescription` (`prescription_id`, `name`, `date_prescribed`, `dose`, `dosage`, `refill_time`, `patient_id`, `staff_id`, `bill_id`) VALUES (8305021, 'corrupti', '1996-01-24', '2801', 'Et debitis esse recusandae.', '2010-03-20', 9969419, 98640156, 957682);
 INSERT INTO `prescription` (`prescription_id`, `name`, `date_prescribed`, `dose`, `dosage`, `refill_time`, `patient_id`, `staff_id`, `bill_id`) VALUES (8651519, 'sunt', '2015-04-30', '2439', 'Maiores est voluptatem similique quis alias n', '1997-04-27', 571192, 4867287, 23580);
 INSERT INTO `prescription` (`prescription_id`, `name`, `date_prescribed`, `dose`, `dosage`, `refill_time`, `patient_id`, `staff_id`, `bill_id`) VALUES (9508923, 'accusamus', '1973-02-01', '836', 'Ut voluptate sint non velit ea.', '2015-09-21', 4064521, 41715661, 375968);
-
-
---
--- TABLE STRUCTURE FOR: reminder
---
-
-DROP TABLE IF EXISTS `reminder`;
-
-CREATE TABLE `reminder` (
-  `reminder_id` int(11) NOT NULL,
-  `time` datetime DEFAULT NULL,
-  `message` mediumtext DEFAULT NULL,
-  `appointment_id` int(11) NOT NULL,
-  `patient_id` int(11) NOT NULL,
-  PRIMARY KEY (`reminder_id`,`appointment_id`,`patient_id`),
-  KEY `fk_reminder_appointment1_idx` (`appointment_id`,`patient_id`),
-  CONSTRAINT `fk_reminder_appointment1` FOREIGN KEY (`appointment_id`, `patient_id`) REFERENCES `appointment` (`appointment_id`, `patient_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
-
---
--- TABLE STRUCTURE FOR: shift
---
-
-DROP TABLE IF EXISTS `shift`;
-
-CREATE TABLE `shift` (
-  `shift_id` int(11) NOT NULL,
-  `start_time` datetime DEFAULT NULL,
-  `end_time` datetime DEFAULT NULL,
-  `working` binary(1) DEFAULT NULL,
-  `staff_id` int(11) NOT NULL,
-  PRIMARY KEY (`shift_id`,`staff_id`),
-  KEY `fk_shift_staff1_idx` (`staff_id`),
-  CONSTRAINT `fk_shift_staff1` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
-
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (898566, '1985-06-24 04:42:31', '1989-02-28 03:55:30', '1', 91241058);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (1384517, '1997-04-02 16:39:22', '1991-07-27 02:32:12', '1', 17352871);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (1512117, '1990-03-15 14:57:17', '1987-02-18 15:27:08', '\0', 77505062);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (2168412, '2019-05-26 05:21:17', '2010-08-27 03:42:03', '1', 19289979);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (2887666, '1988-05-19 00:31:44', '1998-08-11 04:02:55', '1', 31126862);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (3077455, '2002-06-21 23:04:32', '2004-07-13 00:39:13', '\0', 45580181);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (3169035, '1978-11-25 05:25:34', '2001-07-22 09:56:09', '1', 20350543);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (3221305, '1985-07-06 10:42:06', '1990-01-27 04:01:28', '1', 98640156);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (5965817, '1999-10-10 20:06:09', '2010-01-22 03:28:31', '1', 82787955);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (7149448, '1984-01-11 23:45:27', '1989-05-28 12:56:04', '\0', 4867287);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (7512931, '1994-08-21 04:44:07', '1980-12-27 00:49:03', '1', 41715661);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (7732943, '1997-09-22 20:49:07', '1977-04-01 04:40:28', '\0', 69455541);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (7969747, '2001-10-14 12:18:07', '1981-12-20 09:19:07', '\0', 65980927);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (8035591, '1987-03-02 13:10:43', '1984-03-13 20:30:29', '1', 81646647);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (8746282, '1983-01-13 15:06:29', '2022-06-23 01:33:29', '\0', 83875809);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (8861596, '2020-09-22 19:29:55', '1996-04-13 21:30:58', '\0', 36076157);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (9356655, '1979-03-22 00:12:13', '1973-03-30 21:36:06', '\0', 73673923);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (9413884, '1992-09-14 21:11:55', '2015-01-23 03:22:43', '1', 19915689);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (9461830, '1992-02-14 14:59:31', '1995-02-12 12:13:59', '\0', 73579264);
-INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (9781521, '2008-09-28 06:07:29', '2018-03-15 14:37:57', '\0', 92472169);
+INSERT INTO `prescription` (`prescription_id`, `name`, `date_prescribed`, `dose`, `dosage`, `refill_time`, `patient_id`, `staff_id`, `bill_id`) VALUES (1, 'cocaine', '2025-03-01', '69420', 'every minute', '2025-03-02', 2, 1, 1);
 
 
 --
@@ -326,7 +278,7 @@ INSERT INTO `staff` (`staff_id`, `employee_type`, `date_employed`, `user_id`) VA
 INSERT INTO `staff` (`staff_id`, `employee_type`, `date_employed`, `user_id`) VALUES (91241058, 'b', '2017-03-23', '704096819');
 INSERT INTO `staff` (`staff_id`, `employee_type`, `date_employed`, `user_id`) VALUES (92472169, 'c', '2005-02-02', '948334224');
 INSERT INTO `staff` (`staff_id`, `employee_type`, `date_employed`, `user_id`) VALUES (98640156, 'c', '2011-09-09', '10964366');
-
+INSERT INTO `staff` (`staff_id`, `employee_type`, `date_employed`, `user_id`) VALUES (1, 'administrator', '2000-01-01', '1');
 
 --
 -- TABLE STRUCTURE FOR: user
@@ -367,7 +319,8 @@ INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `phone_number`, `email
 INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `phone_number`, `email`, `username`, `password_hash`, `bio`, `profile_pic`) VALUES ('918438895', 'Amelia', 'Wisozk', '548071', 'xwisoky@example.org', 'maya94', 'ba6cc67f11caef96e63f4e49794047991494671c36e63e58f58bea6851f8', 'Facere ea alias exercitationem quisquam qui est aspernatur. Autem natus eveniet nihil nam rerum qui debitis.', NULL);
 INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `phone_number`, `email`, `username`, `password_hash`, `bio`, `profile_pic`) VALUES ('948334224', 'Loma', 'Mann', '470', 'lfeest@example.org', 'lehner.charlotte', '3c551b33681efa14d769bc419dfeb5d7d38ae9fe9b94757e49741adec46a', 'Illo hic officia libero iure tenetur. Quis pariatur voluptates et dolorem officia dignissimos ea.', NULL);
 INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `phone_number`, `email`, `username`, `password_hash`, `bio`, `profile_pic`) VALUES ('961372299', 'Clinton', 'Schuster', '99375', 'rubie37@example.com', 'cale.strosin', '6a50b2a64104880c5951a7ba2e0d54caedc137b1b48c56cb66debb630914', 'Nihil quia cupiditate tenetur numquam. Earum vero et rerum autem. Voluptates fugiat magnam est perferendis libero id voluptas. Corporis dolores non dolorem voluptas.', NULL);
-
+INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `phone_number`, `email`, `username`, `password_hash`, `bio`, `profile_pic`) VALUES ('1', 'Staff', 'Staff', '3043043040', 'staff@staff.com', 'staff', '$2y$10$mRL79JqLRhg9/EGZN.IUUOHTh2BWJHZyjfEpx9hVIChLK1p6F8fTO', 'This is the staff test account.', NULL);
+INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `phone_number`, `email`, `username`, `password_hash`, `bio`, `profile_pic`) VALUES ('2', 'Patient', 'Patient', '3043043040', 'patient@patient.com', 'patient', '$2y$10$mRL79JqLRhg9/EGZN.IUUOHTh2BWJHZyjfEpx9hVIChLK1p6F8fTO', 'This is the patient test account.', NULL);
 
 --
 -- TABLE STRUCTURE FOR: user_token
@@ -407,21 +360,6 @@ INSERT INTO `user_token` (`token_id`, `selector`, `hashed_validator`, `expiry`, 
 INSERT INTO `user_token` (`token_id`, `selector`, `hashed_validator`, `expiry`, `user_id`) VALUES (9698152, 'e70275d14b377ae6dc7f67a7ef40cbd2babcafd9f9f4a97be7e5442b044aa477', 'c7acae22b6672ad0b9c0c973d734cb029aa59bda7dc06e0cfdc6bd15cd0aa7cf', '2008-12-06 02:31:51', '488645518');
 INSERT INTO `user_token` (`token_id`, `selector`, `hashed_validator`, `expiry`, `user_id`) VALUES (9832882, '42c8fce4baa118cc03aa3be974ddb82825465df0ca06c23a99bd74d68a61127a', 'a0d2f1db37b67995be1f9258911157dd9a0423cfd16517608a189fc311d2ec6c', '1974-04-29 02:15:25', '704096819');
 
-
---
--- TABLE STRUCTURE FOR: visitor
---
-
-DROP TABLE IF EXISTS `visitor`;
-
-CREATE TABLE `visitor` (
-  `visitor_id` int(11) NOT NULL,
-  `ip_address` varchar(45) DEFAULT NULL,
-  `user_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`visitor_id`,`user_id`),
-  KEY `fk_visitor_user1_idx` (`user_id`),
-  CONSTRAINT `fk_visitor_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 
 
