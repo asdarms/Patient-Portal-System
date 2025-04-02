@@ -14,6 +14,8 @@ How to setup:
 ![Command to create database](sql.png)
 7. Hit Ctrl+Enter to run the commands, this should create the database with all appropriate tables
 8. Go to localhost/hospital/web_root/login.php in your browser to access site
+9. Login with the email "staff@staff.com" and the password "password" to access the test staff account
+10. Login with the email "patient@patient.com" and the password "password" to access the test patient account
 
 ## GitHub Support
 If you want the project to integrate with GitHub, follow these steps:
