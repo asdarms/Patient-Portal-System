@@ -241,6 +241,44 @@ INSERT INTO `prescription` (`prescription_id`, `name`, `date_prescribed`, `dose`
 INSERT INTO `prescription` (`prescription_id`, `name`, `date_prescribed`, `dose`, `dosage`, `refill_time`, `patient_id`, `staff_id`, `bill_id`) VALUES (9508923, 'accusamus', '1973-02-01', '836', 'Ut voluptate sint non velit ea.', '2015-09-21', 4064521, 41715661, 375968);
 INSERT INTO `prescription` (`prescription_id`, `name`, `date_prescribed`, `dose`, `dosage`, `refill_time`, `patient_id`, `staff_id`, `bill_id`) VALUES (1, 'cocaine', '2025-03-01', '69420', 'every minute', '2025-03-02', 2, 1, 1);
 
+--
+-- TABLE STRUCTURE FOR: shift
+--
+
+DROP TABLE IF EXISTS `shift`;
+
+CREATE TABLE `shift` (
+  `shift_id` int(11) NOT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `working` binary(1) DEFAULT NULL,
+  `staff_id` int(11) NOT NULL,
+  PRIMARY KEY (`shift_id`,`staff_id`),
+  KEY `fk_shift_staff1_idx` (`staff_id`),
+  CONSTRAINT `fk_shift_staff1` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (898566, '1985-06-24 04:42:31', '1989-02-28 03:55:30', '1', 91241058);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (1384517, '1997-04-02 16:39:22', '1991-07-27 02:32:12', '1', 17352871);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (1512117, '1990-03-15 14:57:17', '1987-02-18 15:27:08', '\0', 77505062);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (2168412, '2019-05-26 05:21:17', '2010-08-27 03:42:03', '1', 19289979);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (2887666, '1988-05-19 00:31:44', '1998-08-11 04:02:55', '1', 31126862);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (3077455, '2002-06-21 23:04:32', '2004-07-13 00:39:13', '\0', 45580181);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (3169035, '1978-11-25 05:25:34', '2001-07-22 09:56:09', '1', 20350543);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (3221305, '1985-07-06 10:42:06', '1990-01-27 04:01:28', '1', 98640156);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (5965817, '1999-10-10 20:06:09', '2010-01-22 03:28:31', '1', 82787955);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (7149448, '1984-01-11 23:45:27', '1989-05-28 12:56:04', '\0', 4867287);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (7512931, '1994-08-21 04:44:07', '1980-12-27 00:49:03', '1', 41715661);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (7732943, '1997-09-22 20:49:07', '1977-04-01 04:40:28', '\0', 69455541);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (7969747, '2001-10-14 12:18:07', '1981-12-20 09:19:07', '\0', 65980927);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (8035591, '1987-03-02 13:10:43', '1984-03-13 20:30:29', '1', 81646647);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (8746282, '1983-01-13 15:06:29', '2022-06-23 01:33:29', '\0', 83875809);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (8861596, '2020-09-22 19:29:55', '1996-04-13 21:30:58', '\0', 36076157);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (9356655, '1979-03-22 00:12:13', '1973-03-30 21:36:06', '\0', 73673923);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (9413884, '1992-09-14 21:11:55', '2015-01-23 03:22:43', '1', 19915689);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (9461830, '1992-02-14 14:59:31', '1995-02-12 12:13:59', '\0', 73579264);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (9781521, '2008-09-28 06:07:29', '2018-03-15 14:37:57', '\0', 92472169);
+INSERT INTO `shift` (`shift_id`, `start_time`, `end_time`, `working`, `staff_id`) VALUES (1, '2000-01-01 00:00:00', '2025-04-01 14:00:00', '\0', 1);
 
 --
 -- TABLE STRUCTURE FOR: staff
