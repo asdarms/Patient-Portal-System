@@ -18,13 +18,100 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
         <title>Landing Page - Patient</title>
         <link rel="icon" type="image/hospital-icon" href="../assets/favicon.ico" />
         <link href="../css/styles.css" rel="stylesheet" />
+        <link href="../css/calendar.css" rel="stylesheet">
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    </head>
-    <style>
-        .gc-calendar table.calendar td {
-            height: 86px!important;
-        }
-    </style>
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var calendarEl = document.getElementById('calendar');
+                
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                    },
+                    initialDate: '2025-04-01',
+                    navLinks: true, // can click day/week names to navigate views
+                    selectable: true,
+                    selectMirror: true,
+                    select: function(arg) {
+                        var title = prompt('Event Title:');
+                        if (title) {
+                            calendar.addEvent({
+                                title: title,
+                                start: arg.start,
+                                end: arg.end,
+                                allDay: arg.allDay
+                            })
+                        }  
+                        calendar.unselect()
+                    },
+                    eventClick: function(arg) {
+                        if (confirm('Are you sure you want to delete this event?')) {
+                            arg.event.remove()
+                     }
+                    },
+                    editable: true,
+                    dayMaxEvents: true, // allow "more" link when too many events
+                    events: [
+                        {
+                            title: 'All Day Event',
+                            start: '2025-04-01'
+                        },
+                        {
+                            title: 'Long Event',
+                            start: '2025-04-07',
+                            end: '2025-04-10'
+                        },
+                        {
+                            groupId: 999,
+                            title: 'Repeating Event',
+                            start: '2025-04-09T16:00:00'
+                        },
+                        {
+                            groupId: 999,
+                            title: 'Repeating Event',
+                            start: '2025-04-16T16:00:00'
+                        },
+                        {
+                            title: 'Conference',
+                            start: '2025-04-11',
+                            end: '2025-04-13'
+                        },
+                        {
+                            title: 'Meeting',
+                            start: '2025-04-12T10:30:00',
+                            end: '2025-04-12T12:30:00'
+                        },
+                        {
+                            title: 'Lunch',
+                            start: '2025-04-12T12:00:00'
+                        },
+                        {
+                            title: 'Meeting',
+                            start: '2025-04-12T14:30:00'
+                        },
+                        {
+                            title: 'Happy Hour',
+                            start: '2025-04-12T17:30:00'
+                        },
+                        {
+                            title: 'Dinner',
+                            start: '2025-04-12T20:00:00'
+                        },
+                        {
+                            title: 'Birthday Party',
+                            start: '2025-04-13T07:00:00'
+                        },
+                    ]
+                });
+            
+                calendar.render();
+                });
+            </script>   
+        </head>
+    
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -51,6 +138,7 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
                 </li>
             </ul>
         </nav>
+        
         <div id="layoutSidenav">
 
 
@@ -114,76 +202,15 @@ $firstName = getDatafromTable($conn, "user", ["username" => $_SESSION['username'
                 </nav>
             </div>
 
-
+            <!--MAIN CONTENT-->
             <div id="layoutSidenav_content">
-                <cust id="landing" style="padding-left: 1rem; "></cust>
-                <?php require_once 'footer.php'?>
-            </div>
-
-
+            <cust id="landing" style="padding-left: 1rem; "></cust>
+            <main>
+                <div id='calendar-container'>
+                    <div id='calendar'></div>
+                </div>
+            </main>
+            <?php require_once 'footer.php'?>
         </div>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="../js/scripts.js"></script>
-        <script>
-            $(function (e) {
-                var calendar = $("#landing").calendarGC({
-                dayBegin: 0,
-                prevIcon: '&#x3c;',
-                nextIcon: '&#x3e;',
-                onPrevMonth: function (e) {
-                    console.log("prev");
-                    console.log(e);
-                },
-                onNextMonth: function (e) {
-                    console.log("next");
-                    console.log(e);
-                },
-                events: getHoliday(),
-                onclickDate: function (e, data) {
-                    console.log(e, data);
-                }
-                });
-            });
-
-            function getHoliday() {
-                var d = new Date();
-                var totalDay = new Date(d.getFullYear(), d.getMonth(), 0).getDate();
-                var events = [];
-
-                for (var i = 1; i <= totalDay; i++) {
-                var newDate = new Date(d.getFullYear(), d.getMonth(), i);
-                // See the below jquery for custom events
-
-                // if (newDate.getDay() == 0) {   //if Sunday
-                //     events.push({
-                //     date: newDate,
-                //     eventName: "Sunday free",
-                //     className: "badge bg-danger",
-                //     onclick(e, data) {
-                //         console.log(data);
-                //     },
-                //     dateColor: "red"
-                //     });
-                // }
-                // if (newDate.getDay() == 6) {   //if Saturday
-                //     events.push({
-                //     date: newDate,
-                //     eventName: "Saturday free",
-                //     className: "badge bg-danger",
-                //     onclick(e, data) {
-                //         console.log(data);
-                //     },
-                //     dateColor: "red"
-                //     });
-                // }
-
-                }
-                return events;
-            }
-
-            getHoliday()
-        </script>
     </body>
-        
+    </html>

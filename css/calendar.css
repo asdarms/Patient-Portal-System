@@ -1,0 +1,32 @@
+body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+}
+  
+/* Ensure the calendar doesn't overlap with the navbar */
+#calendar-container {
+    margin-top: 60px; /* Adjust as needed based on navbar height */
+    padding: 20px;
+}
+  
+#calendar {
+    width: 100%; /* Full width of the container */
+    max-width: 100%; /* Ensure it doesn't overflow */
+    margin: 0 auto;
+}
+  
+/* Adjust layout for smaller screens */
+@media (max-width: 768px) {
+    #calendar-container {
+        padding: 10px;
+    }
+}
+
+:root { 
+    --fc-event-bg-color: #0966af;
+    --fc-event-border-color: #0966af;
+    --fc-highlight-color: #e2e7eb;
+    --fc-today-bg-color: #cfe8fc;
+}
