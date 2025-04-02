@@ -1,18 +1,22 @@
-<?php 
-
-require 'header.php';
-require 'functions.php';
-$conn = OpenCon();
-if(!isUserLoggedIn($conn)){
-    Header("Location: login.php");
-} 
-if(sizeof(getDatafromTable($conn, "staff", ["user_id" => $_SESSION["user_id"]])) > 0){
-    header("Location: staff-landing.php");
-    die();
+<?php
+require 'generic.php';
+$content_url = 'calendar.php';
+if ($staff == True) {
+    ?>
+    <title>Landing Page - Staff</title>
+    <?php
+    $staffData = getDatafromTable($conn, "staff", ["user_id" => $userData['user_id']])[0];
+    $shiftData = getDatafromTable($conn, "shift", ["staff_id" => $staffData['staff_id']]);
+    $shifts = [];
+    for ($i = 0; $i < sizeof($shiftData); $i++) {
+        for ($j = 0; $j < 5; $j++) {
+            array_push($shifts, $shiftData[$i][$j]);
+        }
+    }
+} else {
+    ?>
+    <title>Landing Page - Patient</title>
+    <?php
 }
-header("Location: patient-landing.php");
-die();
-
-
-
+require 'landing-content.php';
 ?>
