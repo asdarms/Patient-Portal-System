@@ -128,7 +128,7 @@ CREATE TABLE `lab_order` (
   CONSTRAINT `fk_lab_order_staff1` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
-INSERT INTO `lab_order` (`order_id`, `location`, `type`, `estimated_cost`, `notes`, `appointment_id`, `patient_id`, `staff_id`) VALUES ('1', 'hospital', 'appointment issued lab order', '69420', 'this is a test lab order', 1, 2, 1) 
+INSERT INTO `lab_order` (`order_id`, `location`, `type`, `estimated_cost`, `notes`, `appointment_id`, `patient_id`, `staff_id`) VALUES ('1', 'hospital', 'appointment issued lab order', '69420', 'this is a test lab order', 1, 2, 1);
 
 --
 -- TABLE STRUCTURE FOR: lab_result
@@ -147,7 +147,7 @@ CREATE TABLE `lab_result` (
   CONSTRAINT `fk_lab_result_lab_order1` FOREIGN KEY (`order_id`) REFERENCES `lab_order` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
-INSERT INTO `lab_result` (`result_id`, `tests`, `results`, `notes`, `order_id`) VALUES (1, 'all the tests', 'only bad results', 'the patient is dead', 1) 
+INSERT INTO `lab_result` (`result_id`, `tests`, `results`, `notes`, `order_id`) VALUES (1, 'all the tests', 'only bad results', 'the patient is dead', 1);
 
 -- 
 -- TABLE STRUCTURE FOR: patient
