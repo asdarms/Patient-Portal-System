@@ -21,13 +21,8 @@ if ($staff == True) {
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    
+
 </head>
-<style>
-    .gc-calendar table.calendar td {
-        height: 86px !important;
-    }
-</style>
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -59,8 +54,8 @@ if ($staff == True) {
             </li>
         </ul>
     </nav>
-    <div id="layoutSidenav">
 
+    <div id="layoutSidenav">
 
         <div id="layoutSidenav_nav">
 
@@ -80,7 +75,6 @@ if ($staff == True) {
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                         </div>
-
 
                         <div class="collapse show" id="collapseLayouts" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
@@ -107,12 +101,10 @@ if ($staff == True) {
             </nav>
         </div>
 
-
         <div id="layoutSidenav_content">
             <?php require $content_url ?>
             <?php require 'footer.php' ?>
         </div>
-
 
     </div>
 
