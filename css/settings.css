@@ -27,16 +27,3 @@ input[type="text"], input[type="password"], input[type="file"], textarea {
     border: 1px solid #f1f6f8;
     border-radius: 5px;
 }
-
-button {
-    padding: 10px 20px;
-    background-color: #af4c4f;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #4595a0;
-}

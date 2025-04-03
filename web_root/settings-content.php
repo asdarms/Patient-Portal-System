@@ -3,6 +3,8 @@
 <head>
     <title>User Settings</title>
     <link href="../css/settings.css" rel="stylesheet" />
+    <link href="../css/buttons.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -21,7 +23,7 @@
                 <label for="password">New Password:</label>
                 <input type="password" id="password" name="password" placeholder="Enter new password">
             </div>
-            <button type="submit">Save Changes</button>
+            <button class="btn btn-primary" type="submit">Save Changes</button>
         </form>
     </div>
 </body>
