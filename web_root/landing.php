@@ -18,5 +18,12 @@ if ($staff == True) {
     <title>Landing Page - Patient</title>
     <?php
 }
+$user_id = getDatafromTable($conn, "user", ["username" => $_SESSION['username']])[0]['user_id'];
+$patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];
+$appointments = null;
+if ($patient != null) {
+    $patient_id = $patient['patient_id'];
+    $appointments = getDatafromTable($conn, "appointment", ["patient_id" => $patient_id]);
+}
 require 'landing-content.php';
 ?>

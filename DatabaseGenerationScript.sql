@@ -239,7 +239,7 @@ INSERT INTO `prescription` (`prescription_id`, `name`, `date_prescribed`, `dose`
 INSERT INTO `prescription` (`prescription_id`, `name`, `date_prescribed`, `dose`, `dosage`, `refill_time`, `patient_id`, `staff_id`, `bill_id`) VALUES (8305021, 'corrupti', '1996-01-24', '2801', 'Et debitis esse recusandae.', '2010-03-20', 9969419, 98640156, 957682);
 INSERT INTO `prescription` (`prescription_id`, `name`, `date_prescribed`, `dose`, `dosage`, `refill_time`, `patient_id`, `staff_id`, `bill_id`) VALUES (8651519, 'sunt', '2015-04-30', '2439', 'Maiores est voluptatem similique quis alias n', '1997-04-27', 571192, 4867287, 23580);
 INSERT INTO `prescription` (`prescription_id`, `name`, `date_prescribed`, `dose`, `dosage`, `refill_time`, `patient_id`, `staff_id`, `bill_id`) VALUES (9508923, 'accusamus', '1973-02-01', '836', 'Ut voluptate sint non velit ea.', '2015-09-21', 4064521, 41715661, 375968);
-INSERT INTO `prescription` (`prescription_id`, `name`, `date_prescribed`, `dose`, `dosage`, `refill_time`, `patient_id`, `staff_id`, `bill_id`) VALUES (1, 'cocaine', '2025-03-01', '69420', 'every minute', '2025-03-02', 2, 1, 1);
+INSERT INTO `prescription` (`prescription_id`, `name`, `date_prescribed`, `dose`, `dosage`, `refill_time`, `patient_id`, `staff_id`, `bill_id`) VALUES (1, 'Fentanyl', '2025-03-01', '69420', 'every minute', '2025-03-02', 2, 1, 1);
 
 --
 -- TABLE STRUCTURE FOR: shift

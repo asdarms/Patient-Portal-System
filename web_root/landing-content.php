@@ -6,7 +6,6 @@ if ($staff == True) {
 } else {
     $pageTitle = "Patient Portal System";
 }
-
 ?>
 
 <head>
@@ -17,12 +16,12 @@ if ($staff == True) {
     <meta name="author" content="Group 2" />
     <link rel="icon" type="image/hospital-icon" href="../assets/favicon.ico" />
     <link href="../css/styles.css" rel="stylesheet" />
+    <link href="../css/calendar.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
-    <script src="../js/calendar.js"></script>
+    
 </head>
 <style>
     .gc-calendar table.calendar td {
