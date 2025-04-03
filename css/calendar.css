@@ -24,9 +24,29 @@ body {
     }
 }
 
+/* Calendar Coloring */ 
 :root { 
-    --fc-event-bg-color: #0966af;
-    --fc-event-border-color: #0966af;
-    --fc-highlight-color: #e2e7eb;
-    --fc-today-bg-color: #cfe8fc;
+    /* Appointment/Event Color */
+    --fc-event-bg-color: #48A8F5;
+    --fc-event-border-color: #48A8F5;
+
+    /* Color to indicate current selection */
+    --fc-highlight-color: #cfe8fc;
+
+    /* Color to show current date */
+    --fc-today-bg-color: #eff2f4;
+}
+
+/* Calendar Header Style */
+.fc-toolbar-title {
+    font-weight: bold;
+}
+
+/* Fix Calendar Styling */
+.fc-col-header-cell-cushion, .fc-col-header-cell-cushion:hover, 
+.fc-daygrid-day-number, .fc-daygrid-day-number:hover, 
+.fc-event, .fc-event:hover, 
+.fc-daygrid-more-link, .fc-daygrid-more-link:hover {
+    color: black;
+    text-decoration: none;
 }
