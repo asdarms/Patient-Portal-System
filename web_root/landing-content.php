@@ -95,29 +95,7 @@ if ($staff == True) {
                             </nav>
                         </div>
 
-
-                        <div class="sb-sidenav-menu-heading pt-0 pb-0">
-                            <a class="nav-link collapsed pb-0" href="#" data-bs-toggle="collapse"
-                                data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Pages
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                        </div>
-
-
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="login.php">Login</a>
-                                <a class="nav-link" href="register.php">Register</a>
-                                <a class="nav-link" href="password.php">Forgot Password</a>
-                            </nav>
-                        </div>
-
-
                     </div>
-
 
                 </div>
 
