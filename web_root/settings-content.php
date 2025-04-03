@@ -47,51 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
     <title>User Settings</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #29348d;
-            border-radius: 10px;
-            background-color: #f9f9f9;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #af4c4f;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #4595a0;
-        }
-    </style>
+    <link href="../css/settings.css" rel="stylesheet">
+    <link href="../css/buttons.css" rel="stylesheet">
 </head>
 
 <body>
@@ -119,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="password">New Password:</label>
                 <input type="password" id="password" name="password" placeholder="Enter new password">
             </div>
-            <button type="submit">Save Changes</button>
+            <button class="btn btn-primary" type="submit">Save Changes</button>
         </form>
     </div>
 
