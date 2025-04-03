@@ -5,9 +5,9 @@ echo '<div id="layoutAuthentication_footer">
             <div class="d-flex align-items-center justify-content-between small">
                 <div class="text-muted">Copyright &copy; Patient Portal System 2025</div>
                 <div>
-                    <a href="privacy.php">Privacy Policy</a>
+                    <a href="#">Privacy Policy</a>
                     &middot;
-                    <a href="terms.php">Terms &amp; Conditions</a>
+                    <a href="#">Terms &amp; Conditions</a>
                 </div>
             </div>
         </div>
