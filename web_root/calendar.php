@@ -39,7 +39,7 @@
             for ($i = 0; $i < sizeof($appointments); $i++) {
                 ?>
                 
-                <?php
+                    <?php
             }
             ?>
                     events: [

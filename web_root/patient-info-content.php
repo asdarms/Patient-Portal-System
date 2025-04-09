@@ -1,45 +1,58 @@
-<h1>Patient Info</h1>
-<?php
-if ($patient_info == null) {
-    echo ("No patients!");
-} else {
-    ?>
-    <table class="table">
-        <thead class="thead-light">
-            <tr>
-                <td>Patient ID</td>
-                <td>DOB</td>
-                <td>Sex</td>
-                <td>Address</td>
-                <td>Emergency Contact</td>
-                <td>Medical Data</td>
-                <td>Billing Info</td>
-                <td>Insurance Info</td>
-                <td>SSN</td>
-                <td>User ID</td>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            for ($i = 0; $i < sizeof($patient_info); $i++) {
-                ?>
-                <tr>
-                    <td><?php echo $patient_info[$i]['patient_id'] ?></td>
-                    <td><?php echo $patient_info[$i]['date_of_birth'] ?></td>
-                    <td><?php echo $patient_info[$i]['sex'] ?></td>
-                    <td><?php echo $patient_info[$i]['address'] ?></td>
-                    <td><?php echo $patient_info[$i]['emergency_contact'] ?></td>
-                    <td><?php echo $patient_info[$i]['medical_data'] ?></td>
-                    <td><?php echo $patient_info[$i]['billing_info'] ?></td>
-                    <td><?php echo $patient_info[$i]['insurance_info'] ?></td>
-                    <td><?php echo $patient_info[$i]['ssn'] ?></td>
-                    <td><?php echo $patient_info[$i]['user_id'] ?></td>
-                </tr>
-                <?php
-            }
-            ?>
-        </tbody>
-    </table>
-    <?php
-}
-?>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h4 mb-0"><i class="fas fa-user-injured me-2"></i>Patient Information</h1>
+            </div>
+            <div class="card-body">
+                <?php if (empty($patient_info)): ?>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>No patient records found.
+                    </div>
+                <?php else: ?>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th><i class="fas fa-id-badge me-1"></i>Patient ID</th>
+                                    <th><i class="fas fa-birthday-cake me-1"></i>DOB</th>
+                                    <th><i class="fas fa-venus-mars me-1"></i>Sex</th>
+                                    <th><i class="fas fa-home me-1"></i>Address</th>
+                                    <th><i class="fas fa-phone-alt me-1"></i>Emergency Contact</th>
+                                    <th><i class="fas fa-file-medical me-1"></i>Medical Data</th>
+                                    <th><i class="fas fa-file-invoice-dollar me-1"></i>Billing Info</th>
+                                    <th><i class="fas fa-shield-alt me-1"></i>Insurance Info</th>
+                                    <th><i class="fas fa-id-card me-1"></i>SSN</th>
+                                    <th><i class="fas fa-user me-1"></i>User ID</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($patient_info as $patient): ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($patient['patient_id']) ?></td>
+                                        <td><?= htmlspecialchars($patient['date_of_birth']) ?></td>
+                                        <td><?= htmlspecialchars($patient['sex']) ?></td>
+                                        <td><?= htmlspecialchars($patient['address']) ?></td>
+                                        <td><?= htmlspecialchars($patient['emergency_contact']) ?></td>
+                                        <td><?= htmlspecialchars($patient['medical_data']) ?></td>
+                                        <td><?= htmlspecialchars($patient['billing_info']) ?></td>
+                                        <td><?= htmlspecialchars($patient['insurance_info']) ?></td>
+                                        <td><?= htmlspecialchars($patient['ssn']) ?></td>
+                                        <td><?= htmlspecialchars($patient['user_id']) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="../js/scripts.js"></script>
+</body>
+
+</html>
+<?php CloseCon($conn); ?>
