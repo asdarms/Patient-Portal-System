@@ -1,9 +1,7 @@
 <h1>Appointments</h1>
-<?php
-if ($appointments == null) {
-    echo ("No appointments!");
-} else {
-    ?>
+<?php if (empty($appointments)): ?>
+    <p>No appointments!</p>
+<?php else: ?>
     <table class="table">
         <thead class="thead-light">
             <tr>
@@ -18,24 +16,18 @@ if ($appointments == null) {
             </tr>
         </thead>
         <tbody>
-            <?php
-            for ($i = 0; $i < sizeof($appointments); $i++) {
-                ?>
+            <?php foreach ($appointments as $appointment): ?>
                 <tr>
-                    <td><?php echo $appointments[$i]['appointment_id'] ?></td>
-                    <td><?php echo $appointments[$i]['datetime'] ?></td>
-                    <td><?php echo $appointments[$i]['appointment_type'] ?></td>
-                    <td><?php echo $appointments[$i]['room_number'] ?></td>
-                    <td><?php echo $appointments[$i]['notes'] ?></td>
-                    <td><?php echo $appointments[$i]['patient_id'] ?></td>
-                    <td><?php echo $appointments[$i]['staff_id'] ?></td>
-                    <td><?php echo $appointments[$i]['bill_id'] ?></td>
+                    <td><?= htmlspecialchars($appointment['appointment_id']) ?></td>
+                    <td><?= htmlspecialchars($appointment['datetime']) ?></td>
+                    <td><?= htmlspecialchars($appointment['appointment_type']) ?></td>
+                    <td><?= htmlspecialchars($appointment['room_number']) ?></td>
+                    <td><?= htmlspecialchars($appointment['notes']) ?></td>
+                    <td><?= htmlspecialchars($appointment['patient_id']) ?></td>
+                    <td><?= htmlspecialchars($appointment['staff_id']) ?></td>
+                    <td><?= htmlspecialchars($appointment['bill_id']) ?></td>
                 </tr>
-                <?php
-            }
-            ?>
+            <?php endforeach; ?>
         </tbody>
     </table>
-    <?php
-}
-?>
+<?php endif; ?>

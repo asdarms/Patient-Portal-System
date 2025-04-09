@@ -1,9 +1,7 @@
 <h1>Prescriptions</h1>
-<?php
-if ($prescriptions == null) {
-    echo ("No prescriptions!");
-} else {
-    ?>
+<?php if (empty($prescriptions)): ?>
+    <p>No prescriptions!</p>
+<?php else: ?>
     <table class="table">
         <thead class="thead-light">
             <tr>
@@ -19,25 +17,19 @@ if ($prescriptions == null) {
             </tr>
         </thead>
         <tbody>
-            <?php
-            for ($i = 0; $i < sizeof($prescriptions); $i++) {
-                ?>
+            <?php foreach ($prescriptions as $prescription): ?>
                 <tr>
-                    <td><?php echo $prescriptions[$i]['prescription_id'] ?></td>
-                    <td><?php echo $prescriptions[$i]['name'] ?></td>
-                    <td><?php echo $prescriptions[$i]['date_prescribed'] ?></td>
-                    <td><?php echo $prescriptions[$i]['dose'] ?></td>
-                    <td><?php echo $prescriptions[$i]['dosage'] ?></td>
-                    <td><?php echo $prescriptions[$i]['refill_time'] ?></td>
-                    <td><?php echo $prescriptions[$i]['patient_id'] ?></td>
-                    <td><?php echo $prescriptions[$i]['staff_id'] ?></td>
-                    <td><?php echo $prescriptions[$i]['bill_id'] ?></td>
+                    <td><?= htmlspecialchars($prescription['prescription_id']) ?></td>
+                    <td><?= htmlspecialchars($prescription['name']) ?></td>
+                    <td><?= htmlspecialchars($prescription['date_prescribed']) ?></td>
+                    <td><?= htmlspecialchars($prescription['dose']) ?></td>
+                    <td><?= htmlspecialchars($prescription['dosage']) ?></td>
+                    <td><?= htmlspecialchars($prescription['refill_time']) ?></td>
+                    <td><?= htmlspecialchars($prescription['patient_id']) ?></td>
+                    <td><?= htmlspecialchars($prescription['staff_id']) ?></td>
+                    <td><?= htmlspecialchars($prescription['bill_id']) ?></td>
                 </tr>
-                <?php
-            }
-            ?>
+            <?php endforeach; ?>
         </tbody>
     </table>
-    <?php
-}
-?>
+<?php endif; ?>

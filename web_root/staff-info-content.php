@@ -2,7 +2,7 @@
     <div class="container py-5">
         <div class="card shadow">
             <div class="card-header bg-primary text-white">
-                <h1 class="h4 mb-0"><i class="fas fa-user-injured me-2"></i>Staff Information</h1>
+                <h1 class="h4 mb-0"><i class="fas fa-user-md me-2"></i>Staff Information</h1>
             </div>
             <div class="card-body">
                 <?php if (empty($staff_info)): ?>
@@ -14,9 +14,9 @@
                         <table class="table table-striped table-hover">
                             <thead class="table-dark">
                                 <tr>
-                                    <th><i class="fas fa-id-badge me-1"></i>?Staff ID</th>
-                                    <th><i class="fas fa-birthday-cake me-1"></i>Employee Type</th>
-                                    <th><i class="fas fa-venus-mars me-1"></i>Date Employed</th>
+                                    <th><i class="fas fa-id-badge me-1"></i>Staff ID</th>
+                                    <th><i class="fas fa-question me-1"></i>Employee Type</th>
+                                    <th><i class="fas fa-calendar-day me-1"></i>Date Employed</th>
                                     <th><i class="fas fa-user me-1"></i>User ID</th>
                                 </tr>
                             </thead>
