@@ -6,7 +6,7 @@
             </div>
             <div class="card-body">
                 <?php if (empty($patient_info)): ?>
-                    <div class="alert alert-info">
+                    <div class="alert alert-dark">
                         <i class="fas fa-info-circle me-2"></i>No patient records found.
                     </div>
                 <?php else: ?>
