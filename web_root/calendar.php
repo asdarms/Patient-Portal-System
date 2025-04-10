@@ -13,23 +13,29 @@
             navLinks: true, // can click day/week names to navigate views
             selectable: true,
             selectMirror: true,
-            select: function (arg) {
-                var title = prompt('Event Title:');
-                if (title) {
-                    calendar.addEvent({
-                        title: title,
-                        start: arg.start,
-                        end: arg.end,
-                        allDay: arg.allDay
-                    })
-                }
-                calendar.unselect()
-            },
+      <?php if(isset($staff)){ ?>
+                select: function (arg) {
+                    var title = prompt('Event Title:');
+                    if (title) {
+                                <?php mysqli_query($conn, "INSERT INTO "); ?>
+                                calendar.addEvent({
+                                    title: title,
+                                    start: arg.start,
+                                    end: arg.end,
+                                    allDay: arg.allDay
+                                })
+                        
+                    }
+                    calendar.unselect()
+                },
+      <?php } ?>
+      <?php if(isset($staff)){ ?>
             eventClick: function (arg) {
                 if (confirm('Are you sure you want to delete this event?')) {
                     arg.event.remove()
                 }
             },
+      <?php } ?>
             editable: true,
             dayMaxEvents: true, // allow "more" link when too many events
             events: formattedEvents
