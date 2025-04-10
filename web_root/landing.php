@@ -12,7 +12,11 @@ if (isset($staff)) {
     $staffData = getDatafromTable($conn, "staff", ["user_id" => $user_id])[0];
     $staff_id = $staffData['staff_id'];
     $shifts = getDatafromTable($conn, "shift", ["staff_id" => $staff_id]);
-    $appointments = getDatafromTable($conn, "appointment", ["staff_id" => $staff_id]);
+    if ($staff['employee_type'] == 'administrator') {
+        $appointments = getDatafromTable($conn, "appointment", ["*"]);
+    } else {
+        $appointments = getDatafromTable($conn, "appointment", ["staff_id" => $staff_id]);
+    }
 } else {
     ?>
     <title>Landing Page - Patient</title>
