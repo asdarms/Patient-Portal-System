@@ -5,14 +5,14 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
-
+        const formattedDate = new Date().toISOString().slice(0, 10);
         var calendar = new FullCalendar.Calendar(calendarEl, {
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
-            initialDate: '2025-04-01',
+            initialDate: formattedDate,
             navLinks: true, // can click day/week names to navigate views
             selectable: true,
             selectMirror: true,
