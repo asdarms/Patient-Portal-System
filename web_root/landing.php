@@ -24,10 +24,12 @@ if (!is_null($staff)) {
     $patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];
     if (is_null($patient)) {
         do {
-            $generated_patient_id = random_int(0, 9999999999);
+            $generated_patient_id = random_int(0, 999999999);
         } while (sizeof(getDatafromTable($conn, "patient", ["patient_id" => $generated_patient_id])) > 0);
         $query = "INSERT INTO `patient` (`patient_id`, `user_id`) VALUES ($generated_patient_id, $user_id)";
         $result = mysqli_query($conn, $query);
+        $patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];    
+
     }
     $patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];
     $patient_id = $patient['patient_id'];

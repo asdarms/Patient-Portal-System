@@ -172,8 +172,7 @@ CREATE TABLE `patient` (
   CONSTRAINT `fk_patient_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
-ALTER TABLE `patient`
-  ADD UNIQUE KEY `patient_id` (`patient_id`,`user_id`);
+ALTER TABLE `patient` ADD UNIQUE(`user_id`); 
 
 INSERT INTO `patient` (`patient_id`, `date_of_birth`, `sex`, `address`, `emergency_contact`, `medical_data`, `billing_info`, `insurance_info`, `ssn`, `user_id`) VALUES (571192, '1998-12-07', '1', '65926 Schultz Springs\nKatrineborough, FL 96778-4252', '299.248.4450x2185', 'Aut nobis quia voluptatem quidem.', 'Minus eos itaque ipsum aut ipsum.', 'Asperiores aut expedita ipsum minima.', 0, '686999404');
 INSERT INTO `patient` (`patient_id`, `date_of_birth`, `sex`, `address`, `emergency_contact`, `medical_data`, `billing_info`, `insurance_info`, `ssn`, `user_id`) VALUES (981859, '2025-03-14', '2', '47142 Lenny Ways Suite 213\nTreton, MD 33574-6063', '1-116-444-6994', 'Amet porro est iure nisi.', 'Laboriosam eos possimus magni est non.', 'Est aut suscipit aut odio ea.', 53, '103661916');
