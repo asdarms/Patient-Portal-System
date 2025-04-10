@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-if ($staff == True) {
+if (!is_null($staff)) {
     $pageTitle = "Staff Portal System";
 } else {
     $pageTitle = "Patient Portal System";
@@ -56,19 +56,11 @@ if ($staff == True) {
             </li>
         </ul>
     </nav>
-
     <div id="layoutSidenav">
-
         <div id="layoutSidenav_nav">
-
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-
-
                 <div class="sb-sidenav-menu">
-
-
                     <div class="nav">
-
                         <div class="sb-sidenav-menu-heading pt-2 pb-0">
                             <a class="nav-link collapsed pb-0" href="#" data-bs-toggle="collapse"
                                 data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -85,32 +77,24 @@ if ($staff == True) {
                                 <a class="nav-link" href="appointments.php">Appointments</a>
                                 <a class="nav-link" href="prescriptions.php">Prescriptions</a>
                                 <a class="nav-link" href="labs.php">Labs</a>
-                                <?php if ($staff) {
-                                    ?><a class="nav-link" href="patient-info.php">Patient Info</a><?php
-                                    ?><a class="nav-link" href="staff-info.php">Staff Info</a><?php
-                                } ?>
+                                <?php if (!is_null($staff)): ?>
+                                    <a class="nav-link" href="patient-info.php">Patient Info</a>
+                                    <a class="nav-link" href="staff-info.php">Staff Info</a>
+                                <?php endif; ?>
                             </nav>
                         </div>
-
                     </div>
-
                 </div>
-
-
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
                     <?php echo $firstName; ?>
                 </div>
             </nav>
         </div>
-
         <div id="layoutSidenav_content">
             <?php require $content_url ?>
             <?php require 'footer.php' ?>
         </div>
-
     </div>
-
 </body>
-
 <?php CloseCon($conn); ?>

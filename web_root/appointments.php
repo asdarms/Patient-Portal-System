@@ -1,10 +1,15 @@
 <?php
 require 'generic.php';
-$patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];
-$appointments = null;
-if ($patient != null) {
+if (!is_null($patient)) {
     $patient_id = $patient['patient_id'];
     $appointments = getDatafromTable($conn, "appointment", ["patient_id" => $patient_id]);
+} else if (!is_null($staff)) {
+    if ($staff['employee_type'] == 'administrator') {
+        $appointments = getDatafromTable($conn, "appointment", ["*"]);
+    } else {
+        $staff_id = $staff['staff_id'];
+        $appointments = getDatafromTable($conn, "appointment", ["staff_id" => $staff_id]);
+    }
 }
 $content_url = 'appointments-content.php';
 ?>
