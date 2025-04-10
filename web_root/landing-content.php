@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-if (!is_null($staff)) {
+if (isset($staff)) {
     $pageTitle = "Staff Portal System";
 } else {
     $pageTitle = "Patient Portal System";
@@ -23,7 +23,9 @@ if (!is_null($staff)) {
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -59,7 +61,7 @@ if (!is_null($staff)) {
                                 <a class="nav-link" href="appointments.php">Appointments</a>
                                 <a class="nav-link" href="prescriptions.php">Prescriptions</a>
                                 <a class="nav-link" href="labs.php">Labs</a>
-                                <?php if (!is_null($staff)): ?>
+                                <?php if (isset($staff)): ?>
                                     <a class="nav-link" href="patient-info.php">Patient Info</a>
                                     <a class="nav-link" href="staff-info.php">Staff Info</a>
                                 <?php endif; ?>

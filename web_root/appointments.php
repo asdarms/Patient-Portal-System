@@ -1,10 +1,10 @@
 <?php
 require 'generic.php';
-if (!is_null($patient)) {
+if (isset($patient)) {
     $patient_id = $patient['patient_id'];
     //$appointments = getDatafromTable($conn, "appointment", ["patient_id" => $patient_id]);
     $appointments = $conn->query('SELECT * FROM appointment JOIN patient ON appointment.patient_id = patient.patient_id JOIN user ON user.user_id = patient.patient_id WHERE appointment.patient_id = ' . $patient_id)->fetch_all(MYSQLI_BOTH);
-} else if (!is_null($staff)) {
+} else if (isset($staff)) {
     if ($staff['employee_type'] == 'administrator') {
         $appointments = getDatafromTable($conn, "appointment", ["*"]);
     } else {

@@ -5,7 +5,7 @@ $content_url = 'calendar.php';
 
 $appointments = null;
 
-if (!is_null($staff)) {
+if (isset($staff)) {
     ?>
     <title>Landing Page - Staff</title>
     <?php

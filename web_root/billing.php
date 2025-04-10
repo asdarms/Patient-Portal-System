@@ -3,7 +3,7 @@ require 'generic.php';
 //$staff_id = getDatafromTable($conn, "staff", ["staff_id"]);
 $patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];
 $bills = null;
-if ($patient != null) {
+if (isset($patient)) {
     $patient_id = $patient['patient_id'];
     $bills = getDatafromTable($conn, "bill", ["patient_id" => $patient_id]);
 }

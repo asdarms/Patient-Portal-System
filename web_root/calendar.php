@@ -1,7 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var formattedAppointments = <?php echo json_encode($formattedAppointments);?>;
@@ -96,7 +92,9 @@
 </script>
 <cust id="landing" style="padding-left: 1rem; "></cust>
 <main>
-    <div id='calendar-container'>
-        <div id='calendar'></div>
+    <div class="container py-4">
+        <div id='calendar-container'>
+            <div id='calendar'></div>
+        </div>
     </div>
 </main>
