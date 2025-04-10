@@ -1,5 +1,5 @@
 <body class="bg-light">
-    <div class="container py-3">
+    <div class="container py-4">
         <div class="card shadow">
             <div class="card-header bg-primary text-white">
                 <h1 class="h4 mb-0"><i class="fas fa-flask me-2"></i>Lab Orders and Results</h1>
