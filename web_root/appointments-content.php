@@ -25,16 +25,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($appointments as $appoint): ?>
+                                <?php foreach ($appointments as $appointment): ?>
                                     <tr>
-                                        <td><?= htmlspecialchars($appoint['appointment_id']) ?></td>
-                                        <td><?= htmlspecialchars($appoint['datetime']) ?></td>
-                                        <td><?= htmlspecialchars($appoint['appointment_type']) ?></td>
-                                        <td><?= htmlspecialchars($appoint['room_number']) ?></td>
-                                        <td><?= htmlspecialchars($appoint['notes']) ?></td>
-                                        <td><?= htmlspecialchars($appoint['patient_id']) ?></td>
-                                        <td><?= htmlspecialchars($appoint['staff_id']) ?></td>
-                                        <td><?= htmlspecialchars($appoint['bill_id']) ?></td>
+                                        <td><?= htmlspecialchars($appointment['appointment_id']) ?></td>
+                                        <td><?= htmlspecialchars($appointment['datetime']) ?></td>
+                                        <td><?= htmlspecialchars($appointment['appointment_type']) ?></td>
+                                        <td><?= htmlspecialchars($appointment['room_number']) ?></td>
+                                        <td><?= htmlspecialchars($appointment['notes']) ?></td>
+                                        <td><?= htmlspecialchars($appointment['first_name'] . ' ' . $appointment['last_name']) ?></td>
+                                        <td><?= htmlspecialchars($appointment['staff_id']) ?></td>
+                                        <td><?= htmlspecialchars($appointment['bill_id']) ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -44,9 +44,4 @@
             </div>
         </div>
     </div>
-   
 </body>
-
-
-
-</html>

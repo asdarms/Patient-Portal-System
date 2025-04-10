@@ -26,17 +26,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($prescriptions as $meds): ?>
+                                <?php foreach ($prescriptions as $prescription): ?>
                                     <tr>
-                                        <td><?= htmlspecialchars($meds['prescription_id']) ?></td>
-                                        <td><?= htmlspecialchars($meds['name']) ?></td>
-                                        <td><?= htmlspecialchars($meds['date_prescribed']) ?></td>
-                                        <td><?= htmlspecialchars($meds['dose']) ?></td>
-                                        <td><?= htmlspecialchars($meds['dosage']) ?></td>
-                                        <td><?= htmlspecialchars($meds['refill_time']) ?></td>
-                                        <td><?= htmlspecialchars($meds['patient_id']) ?></td>
-                                        <td><?= htmlspecialchars($meds['staff_id']) ?></td>
-                                        <td><?= htmlspecialchars($meds['bill_id']) ?></td>
+                                        <td><?= htmlspecialchars($prescription['prescription_id']) ?></td>
+                                        <td><?= htmlspecialchars($prescription['name']) ?></td>
+                                        <td><?= htmlspecialchars($prescription['date_prescribed']) ?></td>
+                                        <td><?= htmlspecialchars($prescription['dose']) ?></td>
+                                        <td><?= htmlspecialchars($prescription['dosage']) ?></td>
+                                        <td><?= htmlspecialchars($prescription['refill_time']) ?></td>
+                                        <td><?= htmlspecialchars($prescription['patient_id']) ?></td>
+                                        <td><?= htmlspecialchars($prescription['staff_id']) ?></td>
+                                        <td><?= htmlspecialchars($prescription['bill_id']) ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -46,9 +46,4 @@
             </div>
         </div>
     </div>
-   
 </body>
-
-
-
-</html>

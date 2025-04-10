@@ -5,17 +5,16 @@ $content_url = 'calendar.php';
 
 $appointments = null;
 
-if (!is_null($staff)) {
+if (isset($staff)) {
     ?>
     <title>Landing Page - Staff</title>
     <?php
-    $staffData = getDatafromTable($conn, "staff", ["user_id" => $user_id])[0];
-    $shiftData = getDatafromTable($conn, "shift", ["staff_id" => $staffData['staff_id']]);
-    $shifts = [];
-    for ($i = 0; $i < sizeof($shiftData); $i++) {
-        for ($j = 0; $j < 5; $j++) {
-            array_push($shifts, $shiftData[$i][$j]);
-        }
+    $staff_id = $staff['staff_id'];
+    $shifts = getDatafromTable($conn, "shift", ["staff_id" => $staff_id]);
+    if ($staff['employee_type'] == 'administrator') {
+        $appointments = getDatafromTable($conn, "appointment", ["*"]);
+    } else {
+        $appointments = getDatafromTable($conn, "appointment", ["staff_id" => $staff_id]);
     }
 } else {
     ?>
