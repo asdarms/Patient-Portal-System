@@ -15,7 +15,7 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th><i class="fas fa-id-badge me-1"></i>Staff ID</th>
-                                    <th><i class="fas fa-question me-1"></i>Employee Type</th>
+                                    <th><i class="fas fa-user-md me-1"></i>Employee Type</th>
                                     <th><i class="fas fa-calendar-day me-1"></i>Date Employed</th>
                                     <th><i class="fas fa-user me-1"></i>User ID</th>
                                 </tr>
