@@ -4,7 +4,7 @@ body {
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
 }
-  
+
 /* Ensure the calendar doesn't overlap with the navbar */
 #calendar-container {
     margin-top: 60px; /* Adjust as needed based on navbar height */
@@ -30,16 +30,25 @@ body {
     --fc-event-bg-color: #48A8F5;
     --fc-event-border-color: #48A8F5;
 
+    --fc-button-text-color: #fff;
+    --fc-button-bg-color: #333F49;
+    --fc-button-border-color: #333F49;
+    --fc-button-hover-bg-color: #1E252B;
+    --fc-button-hover-border-color: #1E252B;
+    --fc-button-active-bg-color: #1E252B;
+    --fc-button-active-border-color: #1E252B;
+
     /* Color to indicate current selection */
     --fc-highlight-color: #cfe8fc;
 
     /* Color to show current date */
-    --fc-today-bg-color: #eff2f4;
+    --fc-today-bg-color: #EFF2F4;
 }
 
-/* Calendar Header Style */
-.fc-toolbar-title {
-    font-weight: bold;
+/* Disabled buttons */
+.fc .fc-button-primary:disabled {
+    background-color: #485967;
+    border-color: #485967;
 }
 
 /* Fix Calendar Styling */
@@ -47,6 +56,6 @@ body {
 .fc-daygrid-day-number, .fc-daygrid-day-number:hover, 
 .fc-event, .fc-event:hover, 
 .fc-daygrid-more-link, .fc-daygrid-more-link:hover {
-    color: black;
+    color: #000;
     text-decoration: none;
 }
