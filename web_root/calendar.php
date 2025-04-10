@@ -4,6 +4,8 @@
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        var formattedAppointments = <?php echo json_encode($formattedAppointments);?>;
+        console.log("Formatted Appointments:", formattedAppointments);
         var calendarEl = document.getElementById('calendar');
         const formattedDate = new Date().toISOString().slice(0, 10);
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -35,66 +37,60 @@
             },
             editable: true,
             dayMaxEvents: true, // allow "more" link when too many events
-            <?php
-            for ($i = 0; $i < sizeof($appointments); $i++) {
-                ?>
-                
-                    <?php
-            }
-            ?>
-                    events: [
-                {
-                    title: 'All Day Event',
-                    start: '2025-04-01'
-                },
-                {
-                    title: 'Long Event',
-                    start: '2025-04-07',
-                    end: '2025-04-10'
-                },
-                {
-                    groupId: 999,
-                    title: 'Repeating Event',
-                    start: '2025-04-09T16:00:00'
-                },
-                {
-                    groupId: 999,
-                    title: 'Repeating Event',
-                    start: '2025-04-16T16:00:00'
-                },
-                {
-                    title: 'Conference',
-                    start: '2025-04-11',
-                    end: '2025-04-13'
-                },
-                {
-                    title: 'Meeting',
-                    start: '2025-04-12T10:30:00',
-                    end: '2025-04-12T12:30:00'
-                },
-                {
-                    title: 'Lunch',
-                    start: '2025-04-12T12:00:00'
-                },
-                {
-                    title: 'Meeting',
-                    start: '2025-04-12T14:30:00'
-                },
-                {
-                    title: 'Happy Hour',
-                    start: '2025-04-12T17:30:00'
-                },
-                {
-                    title: 'Dinner',
-                    start: '2025-04-12T20:00:00'
-                },
-                {
-                    title: 'Birthday Party',
-                    start: '2025-04-13T07:00:00'
-                },
-            ]
+            events: formattedAppointments
+            
+            //     events: [ 
+            //     {
+            //         title: 'All Day Event',
+            //         start: '2025-04-01'
+            //     },
+            //     {
+            //         title: 'Long Event',
+            //         start: '2025-04-07',
+            //         end: '2025-04-10'
+            //     },
+            //     {
+            //         groupId: 999,
+            //         title: 'Repeating Event',
+            //         start: '2025-04-09T16:00:00'
+            //     },
+            //     {
+            //         groupId: 999,
+            //         title: 'Repeating Event',
+            //         start: '2025-04-16T16:00:00'
+            //     },
+            //     {
+            //         title: 'Conference',
+            //         start: '2025-04-11',
+            //         end: '2025-04-13'
+            //     },
+            //     {
+            //         title: 'Meeting',
+            //         start: '2025-04-12T10:30:00',
+            //         end: '2025-04-12T12:30:00'
+            //     },
+            //     {
+            //         title: 'Lunch',
+            //         start: '2025-04-12T12:00:00'
+            //     },
+            //     {
+            //         title: 'Meeting',
+            //         start: '2025-04-12T14:30:00'
+            //     },
+            //     {
+            //         title: 'Happy Hour',
+            //         start: '2025-04-12T17:30:00'
+            //     },
+            //     {
+            //         title: 'Dinner',
+            //         start: '2025-04-12T20:00:00'
+            //     },
+            //     {
+            //         title: 'Birthday Party',
+            //         start: '2025-04-13T07:00:00'
+            //     },
+            // ]
         });
-
         calendar.render();
     });
 </script>

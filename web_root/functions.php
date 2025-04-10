@@ -392,3 +392,7 @@ function logout($conn): void
     }
 }
 
+function getAppointments($conn): array 
+{
+    return [];
+}
