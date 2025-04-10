@@ -23,15 +23,17 @@ if ($staff == True) {
     ?>
     <title>Landing Page - Patient</title>
     <?php
-    $patient = getDatafromTable($conn, "patient", ["user_id" => $userData['user_id']])[0];    
+    $patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];    
     if(gettype($patient) != "integer"){
         do {
-            $generated_patient_id = random_int(0, 9999999999);
+            $generated_patient_id = random_int(0, 999999999);
         } while (sizeof(getDatafromTable($conn, "patient", ["patient_id" => $generated_patient_id])) > 0);
         $query = "INSERT INTO `patient` (`patient_id`, `user_id`) VALUES ($generated_patient_id, $user_id)";
         $result = mysqli_query($conn, $query);
+        $patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];    
+        print(($query ). ($result ? 'true' : 'false'));
+        die();
     }
-    $patient = getDatafromTable($conn, "patient", ["user_id" => $userData['user_id']])[0];    
     $patient_id = $patient['patient_id'];
     $appointments = getDatafromTable($conn, "appointment", ["patient_id" => $patient_id]);
 }
