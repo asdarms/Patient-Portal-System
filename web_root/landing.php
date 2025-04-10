@@ -1,13 +1,11 @@
 <?php
 require 'generic.php';
 
-$user_id = $userData['user_id'];
-
 $content_url = 'calendar.php';
 
 $appointments = null;
 
-if ($staff == True) {
+if (!is_null($staff)) {
     ?>
     <title>Landing Page - Staff</title>
     <?php
@@ -23,8 +21,8 @@ if ($staff == True) {
     ?>
     <title>Landing Page - Patient</title>
     <?php
-    $patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];    
-    if(gettype($patient) != "integer"){
+    $patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];
+    if (is_null($patient)) {
         do {
             $generated_patient_id = random_int(0, 999999999);
         } while (sizeof(getDatafromTable($conn, "patient", ["patient_id" => $generated_patient_id])) > 0);
@@ -33,6 +31,7 @@ if ($staff == True) {
         $patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];    
 
     }
+    $patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];
     $patient_id = $patient['patient_id'];
     $appointments = getDatafromTable($conn, "appointment", ["patient_id" => $patient_id]);
 }

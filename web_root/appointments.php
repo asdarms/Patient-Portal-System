@@ -1,11 +1,16 @@
 <?php
 require 'generic.php';
-$user_id = getDatafromTable($conn, "user", ["username" => $_SESSION['username']])[0]['user_id'];
-$patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];
-$appointments = null;
-if ($patient != null) {
+if (!is_null($patient)) {
     $patient_id = $patient['patient_id'];
-    $appointments = getDatafromTable($conn, "appointment", ["patient_id" => $patient_id]);
+    //$appointments = getDatafromTable($conn, "appointment", ["patient_id" => $patient_id]);
+    $appointments = $conn->query('SELECT * FROM appointment JOIN patient ON appointment.patient_id = patient.patient_id JOIN user ON user.user_id = patient.patient_id WHERE appointment.patient_id = ' . $patient_id)->fetch_all(MYSQLI_BOTH);
+} else if (!is_null($staff)) {
+    if ($staff['employee_type'] == 'administrator') {
+        $appointments = getDatafromTable($conn, "appointment", ["*"]);
+    } else {
+        $staff_id = $staff['staff_id'];
+        $appointments = getDatafromTable($conn, "appointment", ["staff_id" => $staff_id]);
+    }
 }
 $content_url = 'appointments-content.php';
 ?>

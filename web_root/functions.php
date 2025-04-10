@@ -22,39 +22,37 @@ function CloseCon($conn)
     $conn->close();
 }
 
-function getDatafromTable(mysqli $conn, string $table, array $searchConditions, $booleanOperations = "AND", $query = "select * from "): int | array
-{   
-    
-
+function getDatafromTable(mysqli $conn, string $table, array $searchConditions, $booleanOperations = "AND", $query = "select * from "): int|array
+{
     $type = gettype($booleanOperations);
     #check for data type
-    if($type == "array"){
-        if(sizeof($booleanOperations) > sizeof($searchConditions)){
+    if ($type == "array") {
+        if (sizeof($booleanOperations) > sizeof($searchConditions)) {
             printf("There should be more search conditions than boolean operations");
             return 100;
         }
         #check for valid boolean operations
-        for($i = 0; $i < sizeof($booleanOperations); $i++){
-            if(!in_array(strtoupper($booleanOperations[$i]), ["OR", "AND", "XOR"])){
+        for ($i = 0; $i < sizeof($booleanOperations); $i++) {
+            if (!in_array(strtoupper($booleanOperations[$i]), ["OR", "AND", "XOR"])) {
                 printf("Error getting data: incorrect boolean operator in '$booleanOperations'");
                 return 101;
             }
         }
 
         #apply default AND
-        for($i = 0; $i < sizeof($searchConditions); $i++){
-            if($i < sizeof($booleanOperations)){
+        for ($i = 0; $i < sizeof($searchConditions); $i++) {
+            if ($i < sizeof($booleanOperations)) {
                 $operations[$i] = strtoupper($booleanOperations[$i]);
             } else {
                 $operations[$i] = "AND";
             }
         }
-    } else if (!($type == "string")){
+    } else if (!($type == "string")) {
         printf("Error incorrect data type for '$booleanOperations'");
         return 103;
     } else {
-        if(in_array(strtoupper($booleanOperations), ["OR", "AND", "XOR"])){
-            for($i = 0; $i < sizeof($searchConditions); $i++){
+        if (in_array(strtoupper($booleanOperations), ["OR", "AND", "XOR"])) {
+            for ($i = 0; $i < sizeof($searchConditions); $i++) {
                 $operations[$i] = strtoupper($booleanOperations);
             }
         }
@@ -62,23 +60,23 @@ function getDatafromTable(mysqli $conn, string $table, array $searchConditions, 
 
     $query .= $table;
 
-    if(sizeof($searchConditions) > 0){
+    if (sizeof($searchConditions) > 0) {
         $query .= " WHERE ";
     }
 
     $i = 0;
-    foreach($searchConditions as $key => $value){
+    foreach ($searchConditions as $key => $value) {
         $query .= $key . " = " . '\'' . $value . '\'';
         $query .= ' ' . $operations[$i] . ' ';
         $i++;
     }
-    $query = substr($query, 0, strlen($query)-(strlen($operations[sizeof($operations)-1])+2)) . ';';
+    $query = substr($query, 0, strlen($query) - (strlen($operations[sizeof($operations) - 1]) + 2)) . ';';
     $result = mysqli_query($conn, $query);
-    if($result === false){
+    if ($result === false) {
         printf("Error message: %s\n", mysqli_error($conn));
         printf($query);
-        return 201; 
-    } else if($result === true){
+        return 201;
+    } else if ($result === true) {
         return 1;
     }
     $results = mysqli_fetch_all($result, MYSQLI_BOTH);
@@ -103,7 +101,7 @@ function registerUser($conn): int
     if (strlen($password) > 7) {
         if (validatePhoneNumber($phoneNumber) !== false) {
             $phoneNumber = validatePhoneNumber($phoneNumber);
-            $userData = getDatafromTable($conn, "user", ["phone_number"=>$phoneNumber, "email"=>$email, "username"=>$username], "OR");
+            $userData = getDatafromTable($conn, "user", ["phone_number" => $phoneNumber, "email" => $email, "username" => $username], "OR");
             if (sizeof($userData) == 0) {
                 $hash = password_hash($password, `PASSWORD_BCRYPT`);
                 do {
