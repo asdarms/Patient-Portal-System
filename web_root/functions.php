@@ -24,8 +24,6 @@ function CloseCon($conn)
 
 function getDatafromTable(mysqli $conn, string $table, array $searchConditions, $booleanOperations = "AND", $query = "select * from "): int|array
 {
-
-
     $type = gettype($booleanOperations);
     #check for data type
     if ($type == "array") {

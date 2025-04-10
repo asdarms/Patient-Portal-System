@@ -23,7 +23,7 @@
                     <td><?= htmlspecialchars($appointment['appointment_type']) ?></td>
                     <td><?= htmlspecialchars($appointment['room_number']) ?></td>
                     <td><?= htmlspecialchars($appointment['notes']) ?></td>
-                    <td><?= htmlspecialchars($appointment['patient_id']) ?></td>
+                    <td><?= htmlspecialchars($appointment['first_name'] . ' ' . $appointment['last_name']) ?></td>
                     <td><?= htmlspecialchars($appointment['staff_id']) ?></td>
                     <td><?= htmlspecialchars($appointment['bill_id']) ?></td>
                 </tr>
