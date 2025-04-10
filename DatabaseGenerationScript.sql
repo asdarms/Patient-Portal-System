@@ -157,14 +157,14 @@ DROP TABLE IF EXISTS `patient`;
 
 CREATE TABLE `patient` (
   `patient_id` int(11) NOT NULL,
-  `date_of_birth` date NOT NULL,
+  `date_of_birth` date ,
   `sex` varchar(45) DEFAULT NULL,
-  `address` tinytext NOT NULL,
+  `address` tinytext,
   `emergency_contact` varchar(45) DEFAULT NULL,
   `medical_data` varchar(45) DEFAULT NULL,
   `billing_info` varchar(45) DEFAULT NULL,
   `insurance_info` varchar(45) DEFAULT NULL,
-  `ssn` int(11) NOT NULL,
+  `ssn` int(11),
   `user_id` bigint(20) NOT NULL,
   PRIMARY KEY (`patient_id`,`user_id`),
   KEY `fk_patient_user_idx` (`user_id`),
