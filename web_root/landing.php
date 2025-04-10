@@ -31,8 +31,7 @@ if ($staff == True) {
         $query = "INSERT INTO `patient` (`patient_id`, `user_id`) VALUES ($generated_patient_id, $user_id)";
         $result = mysqli_query($conn, $query);
         $patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];    
-        print(($query ). ($result ? 'true' : 'false'));
-        die();
+
     }
     $patient_id = $patient['patient_id'];
     $appointments = getDatafromTable($conn, "appointment", ["patient_id" => $patient_id]);
