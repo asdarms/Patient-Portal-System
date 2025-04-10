@@ -39,12 +39,12 @@
   --bs-light: #E2E7EB;
   --bs-dark: #1E252B;
   --bs-primary-rgb: 149, 205, 249;
-  --bs-secondary-rgb: 108, 117, 125;
-  --bs-light-rgb: 248, 249, 250;
-  --bs-dark-rgb: 33, 37, 41;
+  --bs-secondary-rgb: 93, 114, 133;
+  --bs-light-rgb: 226, 231, 235;
+  --bs-dark-rgb: 30, 37, 43;
   --bs-white-rgb: 255, 255, 255;
   --bs-black-rgb: 0, 0, 0;
-  --bs-body-color-rgb: 33, 37, 41;
+  --bs-body-color-rgb: 30, 37, 43;
   --bs-body-bg-rgb: 255, 255, 255;
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -2889,7 +2889,7 @@ textarea.form-control-lg {
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #5D7285;
   --bs-btn-hover-border-color: #5D7285;
-  --bs-btn-focus-shadow-rgb: 108, 117, 125;
+  --bs-btn-focus-shadow-rgb: 93, 114, 133;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #5D7285;
   --bs-btn-active-border-color: #5D7285;
@@ -2906,7 +2906,7 @@ textarea.form-control-lg {
   --bs-btn-hover-color: #000;
   --bs-btn-hover-bg: #E2E7EB;
   --bs-btn-hover-border-color: #E2E7EB;
-  --bs-btn-focus-shadow-rgb: 248, 249, 250;
+  --bs-btn-focus-shadow-rgb: 226, 231, 235;
   --bs-btn-active-color: #000;
   --bs-btn-active-bg: #E2E7EB;
   --bs-btn-active-border-color: #E2E7EB;
@@ -2923,7 +2923,7 @@ textarea.form-control-lg {
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #1E252B;
   --bs-btn-hover-border-color: #1E252B;
-  --bs-btn-focus-shadow-rgb: 33, 37, 41;
+  --bs-btn-focus-shadow-rgb: 30, 37, 43;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #1E252B;
   --bs-btn-active-border-color: #1E252B;
@@ -6388,17 +6388,17 @@ textarea.form-control-lg {
 
 .text-bg-secondary {
   color: #fff !important;
-  background-color: RGBA(108, 117, 125, var(--bs-bg-opacity, 1)) !important;
+  background-color: RGBA(93, 114, 133, var(--bs-bg-opacity, 1)) !important;
 }
 
 .text-bg-light {
   color: #000 !important;
-  background-color: RGBA(248, 249, 250, var(--bs-bg-opacity, 1)) !important;
+  background-color: RGBA(226, 231, 235, var(--bs-bg-opacity, 1)) !important;
 }
 
 .text-bg-dark {
   color: #fff !important;
-  background-color: RGBA(33, 37, 41, var(--bs-bg-opacity, 1)) !important;
+  background-color: RGBA(30, 37, 43, var(--bs-bg-opacity, 1)) !important;
 }
 
 .link-primary {
