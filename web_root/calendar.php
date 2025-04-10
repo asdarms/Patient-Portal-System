@@ -33,8 +33,8 @@
             dayMaxEvents: true, // allow "more" link when too many events
             events: [
                 <?php if (isset($appointments)): ?>
-                        <?php foreach ($appointments as $appointment): ?>
-                                                {
+                    <?php foreach ($appointments as $appointment): ?>
+                        {
                             title: '<?= htmlspecialchars($appointment['appointment_type']) ?>',
                             start: '<?= htmlspecialchars($appointment['datetime']) ?>',
                         },
@@ -42,7 +42,7 @@
                 <?php endif; ?>
                 <?php if (isset($shifts)): ?>
                     <?php foreach ($shifts as $shift): ?>
-                                            {
+                        {
                             title: 'Shift <?= htmlspecialchars($shift['shift_id']) ?>',
                             start: '<?= htmlspecialchars($shift['start_time']) ?>',
                             end: '<?= htmlspecialchars($shift['end_time']) ?>',

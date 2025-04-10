@@ -4,7 +4,6 @@
 
 /* Ensure the calendar doesn't overlap with the navbar */
 #calendar-container {
-    margin-top: 60px; /* Adjust as needed based on navbar height */
     padding: 20px;
 }
   
