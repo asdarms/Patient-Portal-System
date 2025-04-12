@@ -6,9 +6,10 @@ $content_url = 'calendar.php';
 $appointments = null;
 
 if (isset($staff)) {
-    ?>
-    <title>Landing Page - Staff</title>
-    <?php
+    $title = 'Staff';
+    if ($staff['employee_type'] == 'administrator') {
+        $title = 'Admin';
+    }
     $staffData = getDatafromTable($conn, "staff", ["user_id" => $user_id])[0];
     $staff_id = $staffData['staff_id'];
     $shifts = getDatafromTable($conn, "shift", ["staff_id" => $staff_id]);
@@ -18,9 +19,7 @@ if (isset($staff)) {
         $appointments = getDatafromTable($conn, "appointment", ["staff_id" => $staff_id]);
     }
 } else {
-    ?>
-    <title>Landing Page - Patient</title>
-    <?php
+    $title = 'Patient';
     $patient_id = $patient['patient_id'];
     $appointments = getDatafromTable($conn, "appointment", ["patient_id" => $patient_id]);
     $shifts = [];
@@ -28,14 +27,14 @@ if (isset($staff)) {
 
 $formattedAppointments = [];
 $formattedShifts = [];
-if(gettype($appointments) == "array"){
+if (gettype($appointments) == "array") {
     $i = 0;
-    foreach($appointments as $appointment){
+    foreach ($appointments as $appointment) {
         $formattedAppointment = [];
-        if($appointment['appointment_name'] !== null){
+        if ($appointment['appointment_name'] !== null) {
             $formattedAppointment['title'] = $appointment['appointment_name'];
         } else {
-            $formattedAppointment['title'] = 'appointment ' . strval($i+1);
+            $formattedAppointment['title'] = 'appointment ' . strval($i + 1);
         }
         $date = new DateTime($appointment['datetime']);
         $formattedAppointment['start'] = $date->format('Y-m-d H:i:s');
@@ -44,23 +43,25 @@ if(gettype($appointments) == "array"){
         $i += 1;
     }
 }
-if(gettype($shifts) == "array"){
+if (gettype($shifts) == "array") {
     $i = 0;
-    foreach($shifts as $shift){
+    foreach ($shifts as $shift) {
         $formattedShift = [];
-        
+
         $date = new DateTime($shift['start_time']);
         $formattedShift['title'] = 'Shift ' . $date->format('h:i A');
 
         $formattedShift['start'] = $date->format('Y-m-d\TH:i:sP');
-        
+
         $formattedShift['groupId'] = $shift['shift_id'];
         $formattedShift['end'] = $shift['end_time'];
         $formattedShifts[$i] = $formattedShift;
         $i += 1;
     }
 }
-
+?>
+<title>Landing Page - <?php echo $title ?> </title>
+<?php
 array_push($formattedAppointments, ...$formattedShifts);
 require 'landing-content.php';
 ?>

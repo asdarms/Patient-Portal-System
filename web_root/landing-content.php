@@ -3,6 +3,9 @@
 <?php
 if (isset($staff)) {
     $pageTitle = "Staff Portal System";
+    if ($staff['employee_type'] == 'administrator') {
+        $pageTitle = "Admin Portal System";
+    }
 } else {
     $pageTitle = "Patient Portal System";
 }
@@ -63,7 +66,9 @@ if (isset($staff)) {
                                 <a class="nav-link" href="labs.php">Labs</a>
                                 <?php if (isset($staff)): ?>
                                     <a class="nav-link" href="patient-info.php">Patient Info</a>
-                                    <a class="nav-link" href="staff-info.php">Staff Info</a>
+                                    <?php if ($staff['employee_type'] == 'administrator'): ?>
+                                        <a class="nav-link" href="staff-info.php">Staff Info</a>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             </nav>
                         </div>
