@@ -70,12 +70,9 @@ CREATE TABLE `appointment` (
   `notes` tinytext DEFAULT NULL,
   `patient_id` int(11) NOT NULL,
   `staff_id` int(11) NOT NULL,
-  `bill_id` int(11) NOT NULL,
   PRIMARY KEY (`appointment_id`,`patient_id`),
   KEY `fk_appointment_patient1_idx` (`patient_id`),
   KEY `fk_appointment_staff1_idx` (`staff_id`),
-  KEY `fk_appointment_bill1_idx` (`bill_id`),
-  CONSTRAINT `fk_appointment_bill1` FOREIGN KEY (`bill_id`) REFERENCES `bill` (`bill_id`),
   CONSTRAINT `fk_appointment_patient1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`),
   CONSTRAINT `fk_appointment_staff1` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;

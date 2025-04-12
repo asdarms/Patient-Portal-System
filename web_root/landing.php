@@ -38,7 +38,7 @@ if(gettype($appointments) == "array"){
             $formattedAppointment['title'] = 'appointment ' . strval($i+1);
         }
         $date = new DateTime($appointment['datetime']);
-        $formattedAppointment['start'] = $date->format('Y-m-d\TH:i:sP');
+        $formattedAppointment['start'] = $date->format('Y-m-d H:i:s');
         $formattedAppointment['groupId'] = $appointment['appointment_id'];
         $formattedAppointments[$i] = $formattedAppointment;
         $i += 1;
