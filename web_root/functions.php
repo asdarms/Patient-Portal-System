@@ -104,10 +104,11 @@ function registerUser($conn): int
             $userData = getDatafromTable($conn, "user", ["phone_number" => $phoneNumber, "email" => $email, "username" => $username], "OR");
             if (sizeof($userData) == 0) {
                 $hash = password_hash($password, `PASSWORD_BCRYPT`);
-                do {
-                    $userID = random_int(0, PHP_INT_MAX);
-                } while (sizeof(getDatafromTable($conn, "user", ["user_id" => $userID])) > 0);
-                $query = "insert into user (user_id, first_name, last_name, username, email, phone_number, password_hash) values ('$userID', '$first_name', '$last_name', '$username', '$email', '$phoneNumber', '$hash')";
+                //do {
+                //    $userID = random_int(0, PHP_INT_MAX);
+                //} while (sizeof(getDatafromTable($conn, "user", ["user_id" => $userID])) > 0);
+                //$query = "insert into user (user_id, first_name, last_name, username, email, phone_number, password_hash) values ('$userID', '$first_name', '$last_name', '$username', '$email', '$phoneNumber', '$hash')";
+                $query = "insert into user (first_name, last_name, username, email, phone_number, password_hash) values ('$first_name', '$last_name', '$username', '$email', '$phoneNumber', '$hash')";
                 if (mysqli_query($conn, $query)) {
                     sleep($rand_level);
                     return 0;
