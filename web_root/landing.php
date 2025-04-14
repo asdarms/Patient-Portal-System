@@ -6,10 +6,6 @@ $content_url = 'calendar.php';
 $appointments = null;
 
 if (isset($staff)) {
-    $title = 'Staff';
-    if ($staff['employee_type'] == 'administrator') {
-        $title = 'Admin';
-    }
     $staffData = getDatafromTable($conn, "staff", ["user_id" => $user_id])[0];
     $staff_id = $staffData['staff_id'];
     $shifts = getDatafromTable($conn, "shift", ["staff_id" => $staff_id]);
@@ -19,7 +15,6 @@ if (isset($staff)) {
         $appointments = getDatafromTable($conn, "appointment", ["staff_id" => $staff_id]);
     }
 } else {
-    $title = 'Patient';
     $patient_id = $patient['patient_id'];
     $appointments = getDatafromTable($conn, "appointment", ["patient_id" => $patient_id]);
     $shifts = [];
@@ -60,7 +55,7 @@ if (gettype($shifts) == "array") {
     }
 }
 ?>
-<title>Landing Page - <?php echo $title ?> </title>
+<title>Landing Page - <?php echo $mode ?> </title>
 <?php
 array_push($formattedAppointments, ...$formattedShifts);
 require 'landing-content.php';

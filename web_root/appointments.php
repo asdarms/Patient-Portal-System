@@ -1,17 +1,15 @@
 <?php
 require 'generic.php';
-if (isset($patient)) {
+if ($mode == 'Patient') {
     $patient_id = $patient['patient_id'];
-    //$appointments = getDatafromTable($conn, "appointment", ["patient_id" => $patient_id]);
-    $appointments = $conn->query('SELECT * FROM appointment JOIN patient ON appointment.patient_id = patient.patient_id JOIN user ON user.user_id = patient.user_id WHERE appointment.patient_id = ' . $patient_id)->fetch_all(MYSQLI_BOTH);
-    $appointments = getDatafromTable($conn, "appointment", ["patient_id" => $patient_id]);
-} else if (isset($staff)) {
-    if ($staff['employee_type'] == 'administrator') {
-        $appointments = getDatafromTable($conn, "appointment", ["*"]);
-    } else {
-        $staff_id = $staff['staff_id'];
-        $appointments = getDatafromTable($conn, "appointment", ["staff_id" => $staff_id]);
-    }
+    $query = 'SELECT * FROM appointment JOIN staff ON appointment.staff_id = staff.staff_id JOIN user ON user.user_id = staff.user_id WHERE appointment.patient_id = ' . $patient_id;
+    $appointments = queryAsArray($conn, $query);
+} else if ($mode == 'Staff') {
+    $staff_id = $staff['staff_id'];
+    $query = 'SELECT * FROM appointment JOIN patient ON appointment.patient_id = patient.patient_id JOIN user ON user.user_id = patient.user_id WHERE appointment.staff_id = ' . $staff_id;
+    $appointments = queryAsArray($conn, $query);
+} else if ($mode == 'Admin') {
+    $appointments = getDatafromTable($conn, "appointment", ["*"]);
 }
 $content_url = 'appointments-content.php';
 ?>

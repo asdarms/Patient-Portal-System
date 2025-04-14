@@ -150,7 +150,7 @@ INSERT INTO `user` (`first_name`, `last_name`, `phone_number`, `email`, `usernam
 INSERT INTO `staff` (`employee_type`, `date_employed`, `user_id`) VALUES ('Administrator', '2000-01-01', '1');
 INSERT INTO `staff` (`employee_type`, `date_employed`, `user_id`) VALUES ('Doctor', '2000-01-01', '3');
 INSERT INTO `patient` (`date_of_birth`, `sex`, `address`, `emergency_contact`, `medical_data`, `billing_info`, `insurance_info`, `ssn`, `user_id`) VALUES ('2000-01-01', 'male', '1 John Marshall Drive\nHuntington, WV, 25755', '3043043040', 'Medical data.', 'Billing info.', 'Insurance info.', 123456789, '2');
-INSERT INTO `appointment` (`appointment_name`, `datetime`, `appointment_type`, `room_number`, `notes`, `patient_id`, `staff_id`) VALUES ('Yearly Physical', '2025-04-01 14:00:00', 'Checkup', '69', 'Test appointment.', 1, 1);
+INSERT INTO `appointment` (`appointment_name`, `datetime`, `appointment_type`, `room_number`, `notes`, `patient_id`, `staff_id`) VALUES ('Yearly Physical', '2025-04-01 14:00:00', 'Checkup', '69', 'Test appointment.', 1, 2);
 INSERT INTO `bill` (`date`, `amount`, `description`, `notes`, `patient_id`, `staff_id`, `appointment_id`) VALUES ('2025-03-01 14:00:00', '420.69', 'Test bill.', 'This is a test bill.', 1, 1, 1);
 INSERT INTO `prescription` (`name`, `date_prescribed`, `dose`, `dosage`, `refill_time`, `patient_id`, `staff_id`) VALUES ('Fentanyl', '2025-03-01', '69420', 'every minute', '2025-03-02', 1, 1);
 INSERT INTO `lab_order` (`location`, `type`, `estimated_cost`, `notes`, `appointment_id`, `patient_id`, `staff_id`) VALUES ('hospital', 'appointment issued lab order', '69420', 'this is a test lab order', 1, 1, 1);

@@ -393,7 +393,7 @@ function logout($conn): void
     }
 }
 
-function getAppointments($conn): array 
+function queryAsArray($conn, $query): array
 {
-    return [];
+    return $conn->query($query)->fetch_all(MYSQLI_BOTH);
 }

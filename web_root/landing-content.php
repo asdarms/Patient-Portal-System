@@ -1,16 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-if (isset($staff)) {
-    $pageTitle = "Staff Portal System";
-    if ($staff['employee_type'] == 'administrator') {
-        $pageTitle = "Admin Portal System";
-    }
-} else {
-    $pageTitle = "Patient Portal System";
-}
-?>
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -34,7 +23,7 @@ if (isset($staff)) {
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="landing.php"><?php echo $pageTitle ?></a>
+        <a class="navbar-brand ps-3" href="landing.php"><?php echo $mode . " Portal System" ?></a>
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"></form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">

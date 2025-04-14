@@ -11,6 +11,10 @@ $firstName = $userData['first_name'];
 if (sizeOf(getDatafromTable($conn, "staff", ["user_id" => $user_id])) > 0) {
     $staff = getDatafromTable($conn, "staff", ["user_id" => $user_id])[0];
     $patient = null;
+    $mode = 'Staff';
+    if ($staff['employee_type'] == 'Administrator') {
+        $mode = 'Admin';
+    }
 } else {
     if (sizeOf(getDatafromTable($conn, "patient", ["user_id" => $user_id])) == 0) {
         $query = "INSERT INTO `patient` (`user_id`) VALUES ($user_id)";
@@ -18,5 +22,6 @@ if (sizeOf(getDatafromTable($conn, "staff", ["user_id" => $user_id])) > 0) {
     }
     $patient = getDatafromTable($conn, "patient", ["user_id" => $user_id])[0];
     $staff = null;
+    $mode = 'Patient';
 }
 ?>
