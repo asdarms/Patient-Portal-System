@@ -236,7 +236,6 @@
             return 1;
         }
         return 2;
-
     }
 
     function generateTokens(): array
@@ -296,6 +295,7 @@
         if (mysqli_query($conn, $sql)) {
             return true;
         }
+        
         return false;
 
     }
