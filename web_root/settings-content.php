@@ -1,45 +1,43 @@
 <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $bio = trim($_POST['bio']);
+        $password = trim($_POST['password']);
+        $profilePic = $_FILES['profile-pic'];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $bio = trim($_POST['bio']);
-    $password = trim($_POST['password']);
-    $profilePic = $_FILES['profile-pic'];
+        // Handle Profile Picture Upload
+        if ($profilePic['size'] > 0) {
+            $targetDir = "uploads/";
+            $fileName = basename($profilePic["name"]);
+            $targetFilePath = $targetDir . $fileName;
+            $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
 
-    // Handle Profile Picture Upload
-    if ($profilePic['size'] > 0) {
-        $targetDir = "uploads/";
-        $fileName = basename($profilePic["name"]);
-        $targetFilePath = $targetDir . $fileName;
-        $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
-
-        // Allowed file types
-        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
-        if (in_array($fileType, $allowedTypes)) {
-            if (move_uploaded_file($profilePic["tmp_name"], $targetFilePath)) {
-                $updatePic = $conn->prepare("UPDATE user SET profile_picture = ? WHERE username = ?");
-                $updatePic->bind_param("ss", $targetFilePath, $username);
-                $updatePic->execute();
+            // Allowed file types
+            $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+            if (in_array($fileType, $allowedTypes)) {
+                if (move_uploaded_file($profilePic["tmp_name"], $targetFilePath)) {
+                    $updatePic = $conn->prepare("UPDATE user SET profile_picture = ? WHERE username = ?");
+                    $updatePic->bind_param("ss", $targetFilePath, $username);
+                    $updatePic->execute();
+                }
             }
         }
+
+        // Update Bio
+        $updateBio = $conn->prepare("UPDATE user SET bio = ? WHERE username = ?");
+        $updateBio->bind_param("ss", $bio, $username);
+        $updateBio->execute();
+
+        // Update Password if provided
+        if (!empty($password)) {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $updatePassword = $conn->prepare("UPDATE user SET password = ? WHERE username = ?");
+            $updatePassword->bind_param("ss", $hashedPassword, $username);
+            $updatePassword->execute();
+        }
+
+        header("Location: settings.php?success=1");
+        exit();
     }
-
-    // Update Bio
-    $updateBio = $conn->prepare("UPDATE user SET bio = ? WHERE username = ?");
-    $updateBio->bind_param("ss", $bio, $username);
-    $updateBio->execute();
-
-    // Update Password if provided
-    if (!empty($password)) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $updatePassword = $conn->prepare("UPDATE user SET password = ? WHERE username = ?");
-        $updatePassword->bind_param("ss", $hashedPassword, $username);
-        $updatePassword->execute();
-    }
-
-    header("Location: settings.php?success=1");
-    exit();
-}
-
 ?>
 
 <body class="bg-light">
