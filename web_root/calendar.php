@@ -81,7 +81,6 @@
         calendar.render();
     });
 </script>
-<cust id="landing" style="padding-left: 1rem; "></cust>
 <main>
     <div class="container py-4">
         <div id='calendar-container'>
