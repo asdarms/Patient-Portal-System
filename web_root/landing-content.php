@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -53,11 +54,13 @@
                                 <a class="nav-link" href="appointments.php">Appointments</a>
                                 <a class="nav-link" href="prescriptions.php">Prescriptions</a>
                                 <a class="nav-link" href="labs.php">Labs</a>
-                                <?php if (isset($staff)): ?>
+                                <?php if ($mode == 'Admin'): ?>
                                     <a class="nav-link" href="patient-info.php">Patient Info</a>
-                                    <?php if ($staff['employee_type'] == 'administrator'): ?>
-                                        <a class="nav-link" href="staff-info.php">Staff Info</a>
-                                    <?php endif; ?>
+                                    <a class="nav-link" href="staff-info.php">Staff Info</a>
+                                <?php elseif ($mode == 'Staff'): ?>
+                                    <a class="nav-link" href="patient-info.php">Patient Info</a>
+                                <?php elseif ($mode == 'Patient'): ?>
+                                    <a class="nav-link" href="staff-info.php">Staff Info</a>
                                 <?php endif; ?>
                             </nav>
                         </div>

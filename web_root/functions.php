@@ -397,3 +397,9 @@ function queryAsArray($conn, $query): array
 {
     return $conn->query($query)->fetch_all(MYSQLI_BOTH);
 }
+
+function deleteRecord($conn, $table, $id): array
+{
+    $col = $table . '_id';
+    return $conn->query("DELETE FROM $table WHERE $col = $id");
+}

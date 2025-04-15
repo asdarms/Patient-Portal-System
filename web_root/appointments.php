@@ -1,5 +1,6 @@
 <?php
 require 'generic.php';
+
 if ($mode == 'Patient') {
     $patient_id = $patient['patient_id'];
     $query = 'SELECT * FROM appointment JOIN staff ON appointment.staff_id = staff.staff_id JOIN user ON user.user_id = staff.user_id WHERE appointment.patient_id = ' . $patient_id;

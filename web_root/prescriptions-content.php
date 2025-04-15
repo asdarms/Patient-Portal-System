@@ -1,6 +1,9 @@
+
+
 <body class="bg-light">
     <div class="container py-4">
         <div class="card shadow">
+
             <div class="card-header bg-primary text-white">
                 <h1 class="h4 mb-0"><i class="fas fa-prescription me-2"></i>Prescriptions</h1>
             </div>
