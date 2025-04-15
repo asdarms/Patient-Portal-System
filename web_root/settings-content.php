@@ -42,44 +42,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>User Settings</title>
-    <link href="../css/settings.css" rel="stylesheet">
-    <link href="../css/buttons.css" rel="stylesheet">
-</head>
-
-<body>
-
+<body class="bg-light">
     <div class="container">
-        <h2>User Settings</h2>
-        <?php if (isset($_GET['success']))
-            echo "<p style='color:green;'>Changes saved successfully!</p>"; ?>
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">User Settings</h3></div>
+                    <div class="card-body">
+                        <?php if (isset($_GET['success'])): ?>
+                            <div class="alert alert-dark">Changes saved successfully!</div>
+                        <?php endif; ?>
 
-        <form method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="bio">Bio:</label>
-                <textarea id="bio" name="bio"
-                    rows="4"><?php echo htmlspecialchars($userData['bio'] ?? ''); ?></textarea>
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" id="bio" name="bio" placeholder="Your bio here..." style="height: 100px"><?php echo htmlspecialchars($userData['bio'] ?? ''); ?></textarea>
+                                <label for="bio">Bio</label>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="profile-pic" class="form-label">Profile Picture</label>
+                                <input class="form-control" type="file" id="profile-pic" name="profile-pic">
+                                <?php if (!empty($userData['profile_picture'])): ?>
+                                    <div class="mt-2">
+                                        <img src="<?php echo $userData['profile_picture']; ?>" width="100" height="100" style="border-radius:50%;\">
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input class="form-control" type="password" id="password" name="password" placeholder="Enter a new password">
+                                <label for="password">New Password:</label>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                <input class="btn btn-primary" type="submit" value="Save Changes">
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="profile-pic">Profile Picture:</label>
-                <input type="file" id="profile-pic" name="profile-pic">
-                <?php if (!empty($userData['profile_picture'])): ?>
-                    <br><img src="<?php echo $userData['profile_picture']; ?>" width="100" height="100"
-                        style="border-radius:50%;">
-                <?php endif; ?>
-            </div>
-            <div class="form-group">
-                <label for="password">New Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter new password">
-            </div>
-            <button class="btn btn-primary" type="submit">Save Changes</button>
-        </form>
+        </div>
     </div>
-
 </body>
-
-</html>
