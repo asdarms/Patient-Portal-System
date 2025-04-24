@@ -18,7 +18,7 @@
                     <table class="table table-striped table-hover">
                         <thead class="table-dark">
                             <tr>
-                                <?php if ($mode == 'Admin'): ?>
+                                <?php if ($mode != 'Patient'): ?>
                                     <th><i class="fas fa-id-badge me-1"></i>Staff ID</th>
                                 <?php endif; ?>
                                 <th><i class="fas fa-user me-1"></i>Name</th>
@@ -36,7 +36,7 @@
                         <tbody>
                             <?php foreach ($employees as $employee): ?>
                                 <tr>
-                                    <?php if ($mode == 'Admin'): ?>
+                                    <?php if ($mode != 'Patient'): ?>
                                         <td><?= htmlspecialchars($employee['staff_id']) ?></td>
                                     <?php endif; ?>
                                     <td><?= htmlspecialchars($employee['first_name'] . ' ' . $employee['last_name']) ?></td>

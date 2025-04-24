@@ -96,12 +96,12 @@
                                                             </div>
                                                             <div class="input-group">
                                                                 <span class="input-group-text">Phone Number</span>
-                                                                <input type="text" aria-label="Phone Number"
+                                                                <input type="phone" aria-label="Phone Number"
                                                                     class="form-control" id="edit-phone" name="edit-phone" >
                                                             </div>
                                                             <div class="input-group">
                                                                 <span class="input-group-text">Email</span>
-                                                                <input type="text" aria-label="Email" class="form-control"
+                                                                <input type="email" aria-label="Email" class="form-control"
                                                                     id="edit-email" name="edit-email" >
                                                             </div>
                                                             <div class="input-group">
@@ -187,12 +187,12 @@
                                                             </div>
                                                             <div class="input-group">
                                                                 <span class="input-group-text">Phone Number</span>
-                                                                <input type="text" aria-label="Phone Number"
+                                                                <input type="phone" aria-label="Phone Number"
                                                                     class="form-control" id="create-phone" name="phoneNumber" >
                                                             </div>
                                                             <div class="input-group">
                                                                 <span class="input-group-text">Email</span>
-                                                                <input type="text" aria-label="Email" class="form-control"
+                                                                <input type="email" aria-label="Email" class="form-control"
                                                                     id="create-email" name="email" >
                                                             </div>
                                                             <div class="input-group">
