@@ -1,4 +1,9 @@
 <div class="container py-4">
+    <?php if ($query != -1): ?>
+        <div class="alert alert-dark">
+            <i class="fas fa-info-circle me-2"></i><?= htmlspecialchars($query) ?>
+        </div>
+    <?php endif; ?>
     <div class="card shadow">
         <div class="card-header bg-primary text-white">
             <h1 class="h4 mb-0"><i class="fas fa-calendar-alt me-1 me-2"></i>Appointments</h1>
@@ -54,13 +59,18 @@
                                     <?php endif; ?>
                                     <?php if ($mode != 'Patient'): ?>
                                         <td>
-                                            <form method="POST" action="forms.php">
+                                            <form method="POST">
                                                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
                                                     data-bs-target="#editModal" name="edit-button"
-                                                    value=<?= htmlspecialchars($appointment['appointment_id']) ?>>Edit</button>
+                                                    appointment-id=<?= htmlspecialchars($appointment['appointment_id']) ?>
+                                                    edit-name="<?= htmlspecialchars($appointment['appointment_name']) ?>"
+                                                    edit-time="<?= htmlspecialchars($appointment['datetime']) ?>"
+                                                    edit-type="<?= htmlspecialchars($appointment['appointment_type']) ?>"
+                                                    edit-room="<?= htmlspecialchars($appointment['room_number']) ?>"
+                                                    edit-notes="<?= htmlspecialchars($appointment['notes']) ?>">Edit</button>
                                                 <button type="button" class="btn btn-dark" data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal" name='delete-button'
-                                                    value=<?= htmlspecialchars($appointment['appointment_id']) ?>>Delete</button>
+                                                    appointment-id=<?= htmlspecialchars($appointment['appointment_id']) ?>>Delete</button>
                                                 <div class="modal fade" id="deleteModal" tabindex="-1"
                                                     aria-labelledby="deleteModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
@@ -74,7 +84,7 @@
                                                             <div class="modal-body" id="modal-text">
                                                                 Are you sure you want to delete this appointment?
                                                             </div>
-                                                            <input hidden name="appointment-id" id="appointment-id">
+                                                            <input hidden name="delete-id" id="delete-id">
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">No</button>
@@ -94,19 +104,33 @@
                                                                     aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form>
-                                                                    <div class="mb-3">
-                                                                        <label for="recipient-name"
-                                                                            class="col-form-label">Recipient:</label>
-                                                                        <input type="text" class="form-control" id="recipient-name">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="message-text"
-                                                                            class="col-form-label">Message:</label>
-                                                                        <textarea class="form-control" id="message-text"></textarea>
-                                                                    </div>
-                                                                </form>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text">Appointment Name</span>
+                                                                    <input type="text" aria-label="Appointment Name"
+                                                                        class="form-control" id="edit-name" name="edit-name">
+                                                                </div>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text">Date Time</span>
+                                                                    <input type="text" aria-label="Date Time" class="form-control"
+                                                                        id="edit-time" name="edit-time">
+                                                                </div>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text">Appointment Type</span>
+                                                                    <input type="text" aria-label="Appointment Type" id="edit-type"
+                                                                        class="form-control" name="edit-type">
+                                                                </div>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text">Room Number</span>
+                                                                    <input type="text" aria-label="Room Number" class="form-control"
+                                                                        id="edit-room" name="edit-room">
+                                                                </div>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text">Notes</span>
+                                                                    <input type="text" aria-label="Notes" class="form-control"
+                                                                        id="edit-notes" name="edit-notes">
+                                                                </div>
                                                             </div>
+                                                            <input hidden name="edit-id" id="edit-id">
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Close</button>
@@ -119,25 +143,21 @@
                                                 <script>
                                                     var editModal = document.getElementById('editModal')
                                                     editModal.addEventListener('show.bs.modal', function (event) {
-                                                        // Button that triggered the modal
                                                         var button = event.relatedTarget
-                                                        // Extract info from data-bs-* attributes
-                                                        var recipient = button.getAttribute('appointment-id')
-                                                        // If necessary, you could initiate an AJAX request here
-                                                        // and then do the updating in a callback.
-                                                        //
-                                                        // Update the modal's content.
-                                                        var modalTitle = editModal.querySelector('.modal-title')
-                                                        var modalBodyInput = editModal.querySelector('.modal-body input')
-
-                                                        modalTitle.textContent = 'New message to ' + recipient
-                                                        modalBodyInput.value = recipient
+                                                        var appointmentID = document.getElementById('edit-id')
+                                                        var id = button.getAttribute('appointment-id')
+                                                        appointmentID.value = id
+                                                        document.getElementById('edit-name').value = button.getAttribute('edit-name')
+                                                        document.getElementById('edit-time').value = button.getAttribute('edit-time')
+                                                        document.getElementById('edit-type').value = button.getAttribute('edit-type')
+                                                        document.getElementById('edit-room').value = button.getAttribute('edit-room')
+                                                        document.getElementById('edit-notes').value = button.getAttribute('edit-notes')
                                                     })
                                                     var deleteModal = document.getElementById('deleteModal')
                                                     deleteModal.addEventListener('show.bs.modal', function (event) {
                                                         var button = event.relatedTarget
-                                                        var appointmentID = document.getElementById('appointment-id')
-                                                        var id = button.getAttribute('value')
+                                                        var appointmentID = document.getElementById('delete-id')
+                                                        var id = button.getAttribute('appointment-id')
                                                         appointmentID.value = id
                                                     })
                                                 </script>
@@ -146,6 +166,95 @@
                                     <?php endif; ?>
                                 </tr>
                             <?php endforeach; ?>
+                            <tr>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <form method="POST">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#createModal" name='create-button'>Create New</button>
+                                        <div class="modal fade" id="createModal" tabindex="-1"
+                                            aria-labelledby="createModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="createModalLabel">Create appointment
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">Appointment Name</span>
+                                                            <input type="text" aria-label="Appointment Name"
+                                                                class="form-control" id="create-name" name="create-name">
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">Date Time</span>
+                                                            <input type="text" aria-label="Date Time" class="form-control"
+                                                                id="create-time" name="create-time" value="2025-01-01 00:00:00">
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">Appointment Type</span>
+                                                            <input type="text" aria-label="Appointment Type"
+                                                                id="create-type" class="form-control" name="create-type">
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">Room Number</span>
+                                                            <input type="text" aria-label="Room Number" class="form-control"
+                                                                id="create-room" name="create-room">
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">Notes</span>
+                                                            <input type="text" aria-label="Notes" class="form-control"
+                                                                id="create-notes" name="create-notes">
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">Patient ID</span>
+                                                            <input type="text" aria-label="Patient ID" class="form-control"
+                                                                id="create-patient" name="create-patient">
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">Staff ID</span>
+                                                            <input type="text" aria-label="Staff ID" class="form-control"
+                                                                id="create-staff" name="create-staff">
+                                                        </div>
+                                                    
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" name="create-appointment"
+                                                            class="btn btn-primary">Create</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
