@@ -5,7 +5,7 @@
                 <h1 class="h4 mb-0"><i class="fas fa-flask me-2"></i>Lab Orders and Results</h1>
             </div>
             <div class="card-body">
-                <?php if (empty($lab_orders)): ?>
+                <?php if (empty($lab_orders) && $mode == 'Patient'): ?>
                     <div class="alert alert-dark">
                         <i class="fas fa-info-circle me-2"></i>No lab orders found.
                     </div>

@@ -3,6 +3,7 @@
 Group 2: Cherish Cuttill, Andrew d'Arms, Lexi Dunsmore, Sam Richards, Jace Duckworth, Rahson Robinson
 
 HTML, CSS, and some JS was used from https://startbootstrap.com/previews/sb-admin
+Icons from https://fontawesome.com/v5/icons/x-ray?f=classic&s=solid
 
 How to setup:
 1. Install XAMPP

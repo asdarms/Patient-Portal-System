@@ -9,9 +9,9 @@
             <h1 class="h4 mb-0"><i class="fas fa-calendar-alt me-1 me-2"></i>Appointments</h1>
         </div>
         <div class="card-body">
-            <?php if (empty($appointments)): ?>
+            <?php if (empty($appointments) && $mode == 'Patient'): ?>
                 <div class="alert alert-dark">
-                    <i class="fas fa-info-circle me-2"></i>No Appointment at this time.
+                    <i class="fas fa-info-circle me-2"></i>No appointments at this time.
                 </div>
             <?php else: ?>
                 <div class="table-responsive">

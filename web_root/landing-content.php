@@ -54,14 +54,10 @@
                                 <a class="nav-link" href="appointments.php">Appointments</a>
                                 <a class="nav-link" href="prescriptions.php">Prescriptions</a>
                                 <a class="nav-link" href="labs.php">Labs</a>
-                                <?php if ($mode == 'Admin'): ?>
+                                <?php if ($mode != 'Patient'): ?>
                                     <a class="nav-link" href="patient-info.php">Patient Info</a>
-                                    <a class="nav-link" href="staff-info.php">Staff Info</a>
-                                <?php elseif ($mode == 'Staff'): ?>
-                                    <a class="nav-link" href="patient-info.php">Patient Info</a>
-                                <?php elseif ($mode == 'Patient'): ?>
-                                    <a class="nav-link" href="staff-info.php">Staff Info</a>
                                 <?php endif; ?>
+                                <a class="nav-link" href="staff-info.php">Staff Info</a>
                             </nav>
                         </div>
                     </div>
