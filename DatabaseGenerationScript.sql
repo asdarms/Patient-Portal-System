@@ -97,6 +97,8 @@ CREATE TABLE `lab_order` (
   `location` varchar(45) DEFAULT NULL,
   `type` varchar(45) DEFAULT NULL,
   `estimated_cost` double DEFAULT NULL,
+  `tests` mediumtext DEFAULT NULL,
+  `results` mediumtext DEFAULT 'N/A',
   `notes` tinytext DEFAULT NULL,
   `patient_id` int(11) NOT NULL,
   `staff_id` int(11) NOT NULL,
@@ -105,17 +107,6 @@ CREATE TABLE `lab_order` (
   KEY `fk_lab_order_staff1_idx` (`staff_id`),
   CONSTRAINT `fk_lab_order_patient1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`),
   CONSTRAINT `fk_lab_order_staff1` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
-
-CREATE TABLE `lab_result` (
-  `result_id` int(11) NOT NULL AUTO_INCREMENT,
-  `tests` mediumtext DEFAULT NULL,
-  `results` mediumtext DEFAULT NULL,
-  `notes` tinytext DEFAULT NULL,
-  `order_id` int(11) NOT NULL,
-  PRIMARY KEY (`result_id`,`order_id`),
-  KEY `fk_lab_result_lab_order1_idx` (`order_id`),
-  CONSTRAINT `fk_lab_result_lab_order1` FOREIGN KEY (`order_id`) REFERENCES `lab_order` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 CREATE TABLE `shift` (
@@ -149,8 +140,7 @@ INSERT INTO `patient` (`date_of_birth`, `sex`, `address`, `emergency_contact`, `
 INSERT INTO `appointment` (`appointment_name`, `datetime`, `appointment_type`, `room_number`, `notes`, `patient_id`, `staff_id`) VALUES ('Yearly Physical', '2025-04-01 14:00:00', 'Checkup', '69', 'Test appointment.', 1, 2);
 INSERT INTO `bill` (`date`, `amount`, `description`, `notes`, `patient_id`, `staff_id`) VALUES ('2025-03-01 14:00:00', '420.69', 'Test bill.', 'This is a test bill.', 1, 2);
 INSERT INTO `prescription` (`name`, `date_prescribed`, `dose`, `dosage`, `refill_time`, `patient_id`, `staff_id`) VALUES ('Fentanyl', '2025-03-01', '69420', 'every minute', '2025-03-02', 1, 2);
-INSERT INTO `lab_order` (`location`, `type`, `estimated_cost`, `notes`, `patient_id`, `staff_id`) VALUES ('hospital', 'appointment issued lab order', '69420', 'this is a test lab order', 1, 2);
-INSERT INTO `lab_result` (`tests`, `results`, `notes`, `order_id`) VALUES ('all the tests', 'only bad results', 'the patient is dead', 1);
+INSERT INTO `lab_order` (`location`, `type`, `estimated_cost`, `tests`, `notes`, `patient_id`, `staff_id`) VALUES ('hospital', 'appointment issued lab order', '69420', 'blood', 'this is a test lab order', 1, 2);
 INSERT INTO `shift` (`start_time`, `end_time`, `working`, `staff_id`) VALUES ('2000-01-01 00:00:00', '2025-04-01 14:00:00', '\0', 2);
 
 SET SQL_MODE=@OLD_SQL_MODE;

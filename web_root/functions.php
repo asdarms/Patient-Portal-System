@@ -397,9 +397,12 @@ function queryAsArray($conn, $query): array
     return $conn->query($query)->fetch_all(MYSQLI_BOTH);
 }
 
-function deleteRecord($conn, $table, $id): int
+function deleteRecord($conn, $table, $id): String
 {
     $col = $table . '_id';
+    if (str_contains($col, "lab")) {
+        $col = 'order_id';
+    }
     $query = "DELETE FROM $table WHERE $col = $id";
     try {
         mysqli_query($conn, $query);

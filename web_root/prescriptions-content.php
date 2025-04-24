@@ -169,7 +169,6 @@
                                 </tr>
                             <?php endforeach; ?>
                             <?php if ($mode != 'Patient'): ?>
-
                                 <tr>
                                     <td>
 
