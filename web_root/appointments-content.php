@@ -166,95 +166,101 @@
                                     <?php endif; ?>
                                 </tr>
                             <?php endforeach; ?>
-                            <tr>
-                                <td>
+                            <?php if ($mode != 'Patient'): ?>
 
-                                </td>
-                                <td>
+                                <tr>
+                                    <td>
 
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
 
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
 
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
 
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
 
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
 
-                                </td>
-                                <td>
+                                    </td>
+                                    <?php if ($mode == 'Admin'): ?>
+                                        <td>
 
-                                </td>
-                                <td>
-                                    <form method="POST">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#createModal" name='create-button'>Create New</button>
-                                        <div class="modal fade" id="createModal" tabindex="-1"
-                                            aria-labelledby="createModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="createModalLabel">Create appointment
-                                                        </h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="input-group">
-                                                            <span class="input-group-text">Appointment Name</span>
-                                                            <input type="text" aria-label="Appointment Name"
-                                                                class="form-control" id="create-name" name="create-name">
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                    <?php endif; ?>
+                                    <td>
+                                        <form method="POST">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#createModal" name='create-button'>Create New</button>
+                                            <div class="modal fade" id="createModal" tabindex="-1"
+                                                aria-labelledby="createModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="createModalLabel">Create appointment
+                                                            </h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
                                                         </div>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text">Date Time</span>
-                                                            <input type="text" aria-label="Date Time" class="form-control"
-                                                                id="create-time" name="create-time" value="2025-01-01 00:00:00">
+                                                        <div class="modal-body">
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Appointment Name</span>
+                                                                <input type="text" aria-label="Appointment Name"
+                                                                    class="form-control" id="create-name" name="create-name">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Date Time</span>
+                                                                <input type="text" aria-label="Date Time" class="form-control"
+                                                                    id="create-time" name="create-time"
+                                                                    value="2025-01-01 00:00:00">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Appointment Type</span>
+                                                                <input type="text" aria-label="Appointment Type"
+                                                                    id="create-type" class="form-control" name="create-type">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Room Number</span>
+                                                                <input type="text" aria-label="Room Number" class="form-control"
+                                                                    id="create-room" name="create-room">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Notes</span>
+                                                                <input type="text" aria-label="Notes" class="form-control"
+                                                                    id="create-notes" name="create-notes">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Patient ID</span>
+                                                                <input type="text" aria-label="Patient ID" class="form-control"
+                                                                    id="create-patient" name="create-patient">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Staff ID</span>
+                                                                <input type="text" aria-label="Staff ID" class="form-control"
+                                                                    id="create-staff" name="create-staff">
+                                                            </div>
+
                                                         </div>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text">Appointment Type</span>
-                                                            <input type="text" aria-label="Appointment Type"
-                                                                id="create-type" class="form-control" name="create-type">
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" name="create-appointment"
+                                                                class="btn btn-primary">Create</button>
                                                         </div>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text">Room Number</span>
-                                                            <input type="text" aria-label="Room Number" class="form-control"
-                                                                id="create-room" name="create-room">
-                                                        </div>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text">Notes</span>
-                                                            <input type="text" aria-label="Notes" class="form-control"
-                                                                id="create-notes" name="create-notes">
-                                                        </div>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text">Patient ID</span>
-                                                            <input type="text" aria-label="Patient ID" class="form-control"
-                                                                id="create-patient" name="create-patient">
-                                                        </div>
-                                                        <div class="input-group">
-                                                            <span class="input-group-text">Staff ID</span>
-                                                            <input type="text" aria-label="Staff ID" class="form-control"
-                                                                id="create-staff" name="create-staff">
-                                                        </div>
-                                                    
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" name="create-appointment"
-                                                            class="btn btn-primary">Create</button>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>

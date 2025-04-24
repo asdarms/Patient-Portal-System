@@ -69,12 +69,9 @@ CREATE TABLE `bill` (
   `notes` tinytext DEFAULT NULL,
   `patient_id` int(11) NOT NULL,
   `staff_id` int(11) NOT NULL,
-  `appointment_id` int(11) NOT NULL,
   PRIMARY KEY (`bill_id`,`patient_id`),
-  KEY `fk_bill_appointment1_idx` (`appointment_id`),
   KEY `fk_bill_patient1_idx` (`patient_id`),
   KEY `fk_bill_staff1_idx` (`staff_id`),
-  CONSTRAINT `fk_bill_appointment1` FOREIGN KEY (`appointment_id`) REFERENCES `appointment` (`appointment_id`),
   CONSTRAINT `fk_bill_patient1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`),
   CONSTRAINT `fk_bill_staff1` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
@@ -101,13 +98,12 @@ CREATE TABLE `lab_order` (
   `type` varchar(45) DEFAULT NULL,
   `estimated_cost` double DEFAULT NULL,
   `notes` tinytext DEFAULT NULL,
-  `appointment_id` int(11) NOT NULL,
   `patient_id` int(11) NOT NULL,
   `staff_id` int(11) NOT NULL,
   PRIMARY KEY (`order_id`),
-  KEY `fk_lab_order_appointment1_idx` (`appointment_id`,`patient_id`),
+  KEY `fk_lab_order_patient1_idx` (`patient_id`),
   KEY `fk_lab_order_staff1_idx` (`staff_id`),
-  CONSTRAINT `fk_lab_order_appointment1` FOREIGN KEY (`appointment_id`, `patient_id`) REFERENCES `appointment` (`appointment_id`, `patient_id`),
+  CONSTRAINT `fk_lab_order_patient1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`),
   CONSTRAINT `fk_lab_order_staff1` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
@@ -151,9 +147,9 @@ INSERT INTO `staff` (`employee_type`, `date_employed`, `user_id`) VALUES ('Admin
 INSERT INTO `staff` (`employee_type`, `date_employed`, `user_id`) VALUES ('Doctor', '2000-01-01', '3');
 INSERT INTO `patient` (`date_of_birth`, `sex`, `address`, `emergency_contact`, `medical_data`, `billing_info`, `insurance_info`, `ssn`, `user_id`) VALUES ('2000-01-01', 'male', '1 John Marshall Drive\nHuntington, WV, 25755', '3043043040', 'Medical data.', 'Billing info.', 'Insurance info.', 123456789, '2');
 INSERT INTO `appointment` (`appointment_name`, `datetime`, `appointment_type`, `room_number`, `notes`, `patient_id`, `staff_id`) VALUES ('Yearly Physical', '2025-04-01 14:00:00', 'Checkup', '69', 'Test appointment.', 1, 2);
-INSERT INTO `bill` (`date`, `amount`, `description`, `notes`, `patient_id`, `staff_id`, `appointment_id`) VALUES ('2025-03-01 14:00:00', '420.69', 'Test bill.', 'This is a test bill.', 1, 2, 1);
+INSERT INTO `bill` (`date`, `amount`, `description`, `notes`, `patient_id`, `staff_id`) VALUES ('2025-03-01 14:00:00', '420.69', 'Test bill.', 'This is a test bill.', 1, 2);
 INSERT INTO `prescription` (`name`, `date_prescribed`, `dose`, `dosage`, `refill_time`, `patient_id`, `staff_id`) VALUES ('Fentanyl', '2025-03-01', '69420', 'every minute', '2025-03-02', 1, 2);
-INSERT INTO `lab_order` (`location`, `type`, `estimated_cost`, `notes`, `appointment_id`, `patient_id`, `staff_id`) VALUES ('hospital', 'appointment issued lab order', '69420', 'this is a test lab order', 1, 1, 2);
+INSERT INTO `lab_order` (`location`, `type`, `estimated_cost`, `notes`, `patient_id`, `staff_id`) VALUES ('hospital', 'appointment issued lab order', '69420', 'this is a test lab order', 1, 2);
 INSERT INTO `lab_result` (`tests`, `results`, `notes`, `order_id`) VALUES ('all the tests', 'only bad results', 'the patient is dead', 1);
 INSERT INTO `shift` (`start_time`, `end_time`, `working`, `staff_id`) VALUES ('2000-01-01 00:00:00', '2025-04-01 14:00:00', '\0', 2);
 

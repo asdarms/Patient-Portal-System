@@ -26,8 +26,8 @@
                                     <th><i class="fas fa-calendar-alt me-1"></i></i>Date Prescribed</th>
                                     <th><i class="fas fa-pills me-1"></i></i>Dose</th>
                                     <th><i class="fas fa-sticky-note me-1"></i>Dosage</th>
-                                    <th><i class="fas fa-clock me-1"></i>Refill Time</i>
-                                        <?php if ($mode == 'Patient'): ?>
+                                    <th><i class="fas fa-clock me-1"></i>Refill Time</th>
+                                    <?php if ($mode == 'Patient'): ?>
                                         <th><i class="fas fa-user-md me-1"></i>Staff Member</th>
                                     <?php elseif ($mode == 'Staff'): ?>
                                         <th><i class="fas fa-user-injured me-1"></i>Patient</th>
@@ -170,100 +170,106 @@
                                         <?php endif; ?>
                                     </tr>
                                 <?php endforeach; ?>
-                                <tr>
-                                    <td>
+                                <?php if ($mode != 'Patient'): ?>
 
-                                    </td>
-                                    <td>
+                                    <tr>
+                                        <td>
 
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td>
 
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td>
 
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td>
 
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td>
 
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td>
 
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <?php if ($mode == 'Admin'): ?>
+                                            <td>
 
-                                    </td>
-                                    <td>
-                                        <form method="POST">
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#createModal" name='create-button'>Create New</button>
-                                            <div class="modal fade" id="createModal" tabindex="-1"
-                                                aria-labelledby="createModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="createModalLabel">Create prescription
-                                                            </h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="input-group">
-                                                                <span class="input-group-text">Prescription Name</span>
-                                                                <input type="text" aria-label="Prescription Name"
-                                                                    class="form-control" id="create-name"
-                                                                    name="create-name">
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                        <?php endif; ?>
+                                        <td>
+                                            <form method="POST">
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#createModal" name='create-button'>Create New</button>
+                                                <div class="modal fade" id="createModal" tabindex="-1"
+                                                    aria-labelledby="createModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="createModalLabel">Create
+                                                                    prescription
+                                                                </h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
                                                             </div>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text">Date Prescribed</span>
-                                                                <input type="text" aria-label="Date Prescribed"
-                                                                    class="form-control" id="create-date"
-                                                                    name="create-date" value="2025-04-01">
-                                                            </div>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text">Dose</span>
-                                                                <input type="text" aria-label="Dose" id="create-dose"
-                                                                    class="form-control" name="create-dose">
-                                                            </div>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text">Dosage</span>
-                                                                <input type="text" aria-label="Dosage" class="form-control"
-                                                                    id="create-dosage" name="create-dosage">
-                                                            </div>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text">Refill Time</span>
-                                                                <input type="text" aria-label="Refill Time"
-                                                                    class="form-control" id="create-refill"
-                                                                    name="create-refill" value="2025-04-01">
-                                                            </div>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text">Patient ID</span>
-                                                                <input type="text" aria-label="Patient ID"
-                                                                    class="form-control" id="create-patient"
-                                                                    name="create-patient">
-                                                            </div>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text">Staff ID</span>
-                                                                <input type="text" aria-label="Staff ID"
-                                                                    class="form-control" id="create-staff"
-                                                                    name="create-staff">
-                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text">Prescription Name</span>
+                                                                    <input type="text" aria-label="Prescription Name"
+                                                                        class="form-control" id="create-name"
+                                                                        name="create-name">
+                                                                </div>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text">Date Prescribed</span>
+                                                                    <input type="text" aria-label="Date Prescribed"
+                                                                        class="form-control" id="create-date" name="create-date"
+                                                                        value="2025-04-01">
+                                                                </div>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text">Dose</span>
+                                                                    <input type="text" aria-label="Dose" id="create-dose"
+                                                                        class="form-control" name="create-dose">
+                                                                </div>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text">Dosage</span>
+                                                                    <input type="text" aria-label="Dosage" class="form-control"
+                                                                        id="create-dosage" name="create-dosage">
+                                                                </div>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text">Refill Time</span>
+                                                                    <input type="text" aria-label="Refill Time"
+                                                                        class="form-control" id="create-refill"
+                                                                        name="create-refill" value="2025-04-01">
+                                                                </div>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text">Patient ID</span>
+                                                                    <input type="text" aria-label="Patient ID"
+                                                                        class="form-control" id="create-patient"
+                                                                        name="create-patient">
+                                                                </div>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text">Staff ID</span>
+                                                                    <input type="text" aria-label="Staff ID"
+                                                                        class="form-control" id="create-staff"
+                                                                        name="create-staff">
+                                                                </div>
 
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" name="create-prescription"
-                                                                class="btn btn-primary">Create</button>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" name="create-prescription"
+                                                                    class="btn btn-primary">Create</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </form>
-                                    </td>
-                                </tr>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>

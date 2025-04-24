@@ -61,7 +61,7 @@ if (isset($_POST['create-appointment'])) {
     $query = "INSERT INTO appointment (appointment_name, datetime, appointment_type, room_number, notes, patient_id, staff_id) VALUES (\"$new_name\", \"$new_time\", \"$new_type\", \"$new_room\", \"$new_notes\", \"$new_patient\", \"$new_staff\");";
     try {
         mysqli_query($conn, $query);
-        $query = 'Appointment successfully updated.';
+        $query = 'Appointment successfully created.';
     } catch (mysqli_sql_exception $e) {
         if (str_contains($e, "a foreign key constraint fails")) {
             $query = "Failed! Improper patient or staff ID.";

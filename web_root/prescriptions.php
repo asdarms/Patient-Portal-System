@@ -59,7 +59,7 @@ if (isset($_POST['create-prescription'])) {
     $query = "INSERT INTO prescription (name, date_prescribed, dose, dosage, refill_time, patient_id, staff_id) VALUES (\"$new_name\", \"$new_date\", \"$new_dose\", \"$new_dosage\", \"$new_refill\", \"$new_patient\", \"$new_staff\");";
     try {
         mysqli_query($conn, $query);
-        $query = 'Prescription successfully updated.';
+        $query = 'Prescription successfully created.';
     } catch (mysqli_sql_exception $e) {
         if (str_contains($e, "a foreign key constraint fails")) {
             $query = "Failed! Improper patient or staff ID.";
