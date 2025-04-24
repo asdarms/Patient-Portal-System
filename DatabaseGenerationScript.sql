@@ -23,8 +23,8 @@ CREATE TABLE `staff` (
   `staff_id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_type` varchar(45) DEFAULT NULL,
   `date_employed` date DEFAULT NULL,
-  `user_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`staff_id`,`user_id`),
+  `user_id` bigint(20) NOT NULL UNIQUE,
+  PRIMARY KEY (`staff_id`),
   KEY `fk_staff_user1_idx` (`user_id`),
   CONSTRAINT `fk_staff_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
@@ -40,7 +40,7 @@ CREATE TABLE `patient` (
   `insurance_info` varchar(45) DEFAULT NULL,
   `ssn` int(11),
   `user_id` bigint(20) NOT NULL UNIQUE,
-  PRIMARY KEY (`patient_id`,`user_id`),
+  PRIMARY KEY (`patient_id`),
   KEY `fk_patient_user_idx` (`user_id`),
   CONSTRAINT `fk_patient_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
@@ -54,7 +54,7 @@ CREATE TABLE `appointment` (
   `notes` tinytext DEFAULT NULL,
   `patient_id` int(11) NOT NULL,
   `staff_id` int(11) NOT NULL,
-  PRIMARY KEY (`appointment_id`,`patient_id`),
+  PRIMARY KEY (`appointment_id`),
   KEY `fk_appointment_patient1_idx` (`patient_id`),
   KEY `fk_appointment_staff1_idx` (`staff_id`),
   CONSTRAINT `fk_appointment_patient1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`),
@@ -69,7 +69,7 @@ CREATE TABLE `bill` (
   `notes` tinytext DEFAULT NULL,
   `patient_id` int(11) NOT NULL,
   `staff_id` int(11) NOT NULL,
-  PRIMARY KEY (`bill_id`,`patient_id`),
+  PRIMARY KEY (`bill_id`),
   KEY `fk_bill_patient1_idx` (`patient_id`),
   KEY `fk_bill_staff1_idx` (`staff_id`),
   CONSTRAINT `fk_bill_patient1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`),
@@ -115,7 +115,7 @@ CREATE TABLE `shift` (
   `end_time` datetime DEFAULT NULL,
   `working` binary(1) DEFAULT NULL,
   `staff_id` int(11) NOT NULL,
-  PRIMARY KEY (`shift_id`,`staff_id`),
+  PRIMARY KEY (`shift_id`),
   KEY `fk_shift_staff1_idx` (`staff_id`),
   CONSTRAINT `fk_shift_staff1` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;

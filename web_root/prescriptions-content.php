@@ -19,7 +19,7 @@
                         <thead class="table-dark">
                             <tr>
                                 <?php if ($mode == 'Admin'): ?>
-                                    <th><i class="fas fa-id-badge me-1"></i>Prescription ID</th>
+                                    <th><i class="fas fa-id-badge me-1"></i>ID</th>
                                 <?php endif; ?>
                                 <th><i class="fas fa-prescription-bottle me-1"></i>Name</th>
                                 <th><i class="fas fa-calendar-alt me-1"></i></i>Date Prescribed</th>

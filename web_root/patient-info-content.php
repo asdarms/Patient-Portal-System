@@ -18,7 +18,7 @@
                     <table class="table table-striped table-hover">
                         <thead class="table-dark">
                             <tr>
-                                <th><i class="fas fa-id-badge me-1"></i>Patient ID</th>
+                                <th><i class="fas fa-id-badge me-1"></i>ID</th>
                                 <th><i class="fas fa-user me-1"></i>Name</th>
                                 <th><i class="fas fa-birthday-cake me-1"></i>DOB</th>
                                 <th><i class="fas fa-venus-mars me-1"></i>Sex</th>
@@ -28,8 +28,6 @@
                                 <th><i class="fas fa-file-invoice-dollar me-1"></i>Billing Info</th>
                                 <th><i class="fas fa-shield-alt me-1"></i>Insurance Info</th>
                                 <th><i class="fas fa-id-card me-1"></i>SSN</th>
-                                <th><i class="fas fa-phone me-1"></i>Phone Number</th>
-                                <th><i class="fas fa-at me-1"></i>Email</th>
                                 <th><i class="fas fa-terminal me-1"></i>Action</th>
                             </tr>
                         </thead>
@@ -46,8 +44,6 @@
                                     <td><?= htmlspecialchars($patient['billing_info']) ?></td>
                                     <td><?= htmlspecialchars($patient['insurance_info']) ?></td>
                                     <td><?= htmlspecialchars($patient['ssn']) ?></td>
-                                    <td><?= htmlspecialchars($patient['phone_number']) ?></td>
-                                    <td><?= htmlspecialchars($patient['email']) ?></td>
                                     <td>
                                         <form method="POST">
                                             <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
@@ -62,9 +58,7 @@
                                                 insurance="<?= htmlspecialchars($patient['insurance_info']) ?>"
                                                 ssn="<?= htmlspecialchars($patient['ssn']) ?>"
                                                 first="<?= htmlspecialchars($patient['first_name']) ?>"
-                                                last="<?= htmlspecialchars($patient['last_name']) ?>"
-                                                phone="<?= htmlspecialchars($patient['phone_number']) ?>"
-                                                email="<?= htmlspecialchars($patient['email']) ?>">Edit</button>
+                                                last="<?= htmlspecialchars($patient['last_name']) ?>">Edit</button>
                                             <button type="button" class="btn btn-dark" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal" name='delete-button'
                                                 patient-id=<?= htmlspecialchars($patient['patient_id']) ?>>Delete</button>
@@ -154,16 +148,6 @@
                                                                 <input type="text" aria-label="SSN" class="form-control"
                                                                     id="edit-ssn" name="edit-ssn">
                                                             </div>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text">Phone Number</span>
-                                                                <input type="text" aria-label="Phone Number"
-                                                                    class="form-control" id="edit-phone" name="edit-phone">
-                                                            </div>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text">Email</span>
-                                                                <input type="text" aria-label="Email" class="form-control"
-                                                                    id="edit-email" name="edit-email">
-                                                            </div>
                                                         </div>
                                                         <input hidden name="edit-id" id="edit-id">
                                                         <div class="modal-footer">
@@ -192,8 +176,6 @@
                                                     document.getElementById('edit-ssn').value = button.getAttribute('ssn')
                                                     document.getElementById('edit-first').value = button.getAttribute('first')
                                                     document.getElementById('edit-last').value = button.getAttribute('last')
-                                                    document.getElementById('edit-phone').value = button.getAttribute('phone')
-                                                    document.getElementById('edit-email').value = button.getAttribute('email')
 
                                                 })
                                                 var deleteModal = document.getElementById('deleteModal')
@@ -208,6 +190,97 @@
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
+                            <?php if ($mode != 'Patient'): ?>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <form method="POST">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#createModal" name='create-button'>Create New</button>
+                                            <div class="modal fade" id="createModal" tabindex="-1"
+                                                aria-labelledby="createModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="createModalLabel">Create
+                                                                patient
+                                                            </h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">User ID</span>
+                                                                <input type="text" aria-label="User ID" class="form-control"
+                                                                    id="create-id" name="create-id">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Date of Birth</span>
+                                                                <input type="text" aria-label="Date of Birth"
+                                                                    class="form-control" id="create-dob" name="create-dob" value="2025-01-01 00:00:00">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Sex</span>
+                                                                <input type="text" aria-label="Sex" class="form-control"
+                                                                    id="create-sex" name="create-sex">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Address</span>
+                                                                <input type="text" aria-label="Address" id="create-address"
+                                                                    class="form-control" name="create-address">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Emergency Contact</span>
+                                                                <input type="text" aria-label="Emergency Contact"
+                                                                    class="form-control" id="create-emergency"
+                                                                    name="create-emergency">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Medical Data</span>
+                                                                <input type="text" aria-label="Medical Data"
+                                                                    class="form-control" id="create-medical"
+                                                                    name="create-medical">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Billing Info</span>
+                                                                <input type="text" aria-label="Billing Info"
+                                                                    class="form-control" id="create-billing"
+                                                                    name="create-billing">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Insurance Info</span>
+                                                                <input type="text" aria-label="Insurance Info"
+                                                                    class="form-control" id="create-insurance"
+                                                                    name="create-insurance">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">SSN</span>
+                                                                <input type="text" aria-label="SSN" class="form-control"
+                                                                    id="create-ssn" name="create-ssn">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" name="create-patient"
+                                                                class="btn btn-primary">Create</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 <?php endif; ?>

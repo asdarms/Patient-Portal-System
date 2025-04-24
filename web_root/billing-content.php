@@ -19,7 +19,7 @@
                         <thead class="table-dark">
                             <tr>
                                 <?php if ($mode == 'Admin'): ?>
-                                    <th><i class="fas fa-clipboard-list me-1"></i>Bill ID</th>
+                                    <th><i class="fas fa-clipboard-list me-1"></i>ID</th>
                                 <?php endif; ?>
                                 <th><i class="fas fa-calendar-check me-1"></i>Date</th>
                                 <th class="text-end"><i class="fas fa-dollar-sign me-1"></i>Amount</th>

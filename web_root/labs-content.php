@@ -19,7 +19,7 @@
                         <thead class="table-dark">
                             <tr>
                                 <?php if ($mode == 'Admin'): ?>
-                                    <th><i class="fas fa-id-badge me-1"></i>Order ID</th>
+                                    <th><i class="fas fa-id-badge me-1"></i>ID</th>
                                 <?php endif; ?>
                                 <th><i class="fas fa-map-marker-alt me-1"></i>Location</th>
                                 <th><i class="fas fa-vial me-1"></i>Type</th>

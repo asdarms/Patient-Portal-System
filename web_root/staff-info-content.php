@@ -54,7 +54,7 @@
                                                     staff-id=<?= htmlspecialchars($employee['staff_id']) ?>
                                                     first="<?= htmlspecialchars($employee['first_name']) ?>"
                                                     last="<?= htmlspecialchars($employee['last_name']) ?>"
-                                                    type="<?= htmlspecialchars($employee['employee_type']) ?>"
+                                                    employee-type="<?= htmlspecialchars($employee['employee_type']) ?>"
                                                     date="<?= htmlspecialchars($employee['date_employed']) ?>"
                                                     phone="<?= htmlspecialchars($employee['phone_number']) ?>"
                                                     email="<?= htmlspecialchars($employee['email']) ?>">Edit</button>
@@ -106,6 +106,11 @@
                                                                         id="edit-last" name="edit-last">
                                                                 </div>
                                                                 <div class="input-group">
+                                                                    <span class="input-group-text">Employee Type</span>
+                                                                    <input type="text" aria-label="Employee Type" class="form-control"
+                                                                        id="edit-type" name="edit-type">
+                                                                </div>
+                                                                <div class="input-group">
                                                                     <span class="input-group-text">Date Employed</span>
                                                                     <input type="text" aria-label="Date Employed"
                                                                         class="form-control" id="edit-date" name="edit-date">
@@ -140,6 +145,7 @@
                                                         idField.value = id
                                                         document.getElementById('edit-first').value = button.getAttribute('first')
                                                         document.getElementById('edit-last').value = button.getAttribute('last')
+                                                        document.getElementById('edit-type').value = button.getAttribute('employee-type')
                                                         document.getElementById('edit-date').value = button.getAttribute('date')
                                                         document.getElementById('edit-phone').value = button.getAttribute('phone')
                                                         document.getElementById('edit-email').value = button.getAttribute('email')
@@ -157,6 +163,59 @@
                                     <?php endif; ?>
                                 </tr>
                             <?php endforeach; ?>
+                            <?php if ($mode == 'Admin'): ?>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <form method="POST">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#createModal" name='create-button'>Create New</button>
+                                            <div class="modal fade" id="createModal" tabindex="-1"
+                                                aria-labelledby="createModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="createModalLabel">Create
+                                                                employee
+                                                            </h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">User ID</span>
+                                                                <input type="text" aria-label="User ID" class="form-control"
+                                                                    id="create-id" name="create-id">
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Employee Type</span>
+                                                                <input type="text" aria-label="Employee Type"
+                                                                    class="form-control" id="create-type" name="create-type" >
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">Date Employed</span>
+                                                                <input type="text" aria-label="Date Employed" class="form-control"
+                                                                    id="create-date" name="create-date" value="2025-01-01">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" name="create-staff"
+                                                                class="btn btn-primary">Create</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
